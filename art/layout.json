@@ -1,0 +1,735 @@
+{
+  "version": 2,
+  "units": "points; x and y are centres on the canvas; hit is the width and height of the mouse target",
+  "drawing": "background, then controls in list order; knob_light items are static and draw `frame`; glow items show while `source` equals `on_value` and `requires` is on",
+  "glow_note": "over: weight = intensity. add: opaque on black, and iPlug2 Add squares the weight, so weight = sqrt(intensity)",
+  "canvas": {
+    "w": 1280,
+    "h": 620
+  },
+  "bar": {
+    "x": 0,
+    "y": 0,
+    "w": 1280,
+    "h": 44,
+    "colour": "#37322c"
+  },
+  "background": {
+    "asset": "bg",
+    "x": 0,
+    "y": 44,
+    "w": 1280,
+    "h": 576
+  },
+  "retina_scale": 2,
+  "knob_axis_offset": [
+    0,
+    4.38
+  ],
+  "knob_angle_deg": [
+    -150.0,
+    150.0
+  ],
+  "assets": {
+    "bg": {
+      "file": "bg.jpg",
+      "kind": "plate",
+      "w": 1280,
+      "h": 576
+    },
+    "glow_tubes": {
+      "file": "glow_tubes.jpg",
+      "kind": "additive",
+      "w": 780,
+      "h": 206
+    },
+    "knob_left": {
+      "file": "knob_left.png",
+      "kind": "knob",
+      "w": 600,
+      "h": 640,
+      "cell": [
+        60,
+        64
+      ],
+      "columns": 10,
+      "rows": 10,
+      "frames": 97
+    },
+    "knob_right": {
+      "file": "knob_right.png",
+      "kind": "knob",
+      "w": 600,
+      "h": 640,
+      "cell": [
+        60,
+        64
+      ],
+      "columns": 10,
+      "rows": 10,
+      "frames": 97
+    },
+    "knob_light": {
+      "file": "knob_light.png",
+      "kind": "knob_light",
+      "w": 540,
+      "h": 64,
+      "cell": [
+        60,
+        64
+      ],
+      "columns": 9,
+      "rows": 1,
+      "frames": 9
+    },
+    "button_bright": {
+      "file": "button_bright.png",
+      "kind": "button",
+      "w": 80,
+      "h": 40,
+      "cell": [
+        40,
+        40
+      ],
+      "columns": 2,
+      "rows": 1,
+      "frames": 2
+    },
+    "button_crunch": {
+      "file": "button_crunch.png",
+      "kind": "button",
+      "w": 80,
+      "h": 40,
+      "cell": [
+        40,
+        40
+      ],
+      "columns": 2,
+      "rows": 1,
+      "frames": 2
+    },
+    "button_channel": {
+      "file": "button_channel.png",
+      "kind": "button",
+      "w": 80,
+      "h": 40,
+      "cell": [
+        40,
+        40
+      ],
+      "columns": 2,
+      "rows": 1,
+      "frames": 2
+    },
+    "toggle": {
+      "file": "toggle.png",
+      "kind": "toggle",
+      "w": 104,
+      "h": 88,
+      "cell": [
+        52,
+        88
+      ],
+      "columns": 2,
+      "rows": 1,
+      "frames": 2
+    },
+    "rocker_standby": {
+      "file": "rocker_standby.png",
+      "kind": "rocker",
+      "w": 104,
+      "h": 80,
+      "cell": [
+        52,
+        80
+      ],
+      "columns": 2,
+      "rows": 1,
+      "frames": 2
+    },
+    "rocker_power": {
+      "file": "rocker_power.png",
+      "kind": "rocker",
+      "w": 104,
+      "h": 80,
+      "cell": [
+        52,
+        80
+      ],
+      "columns": 2,
+      "rows": 1,
+      "frames": 2
+    },
+    "glow_green": {
+      "file": "glow_green.png",
+      "kind": "glow",
+      "w": 64,
+      "h": 64,
+      "cell": [
+        64,
+        64
+      ],
+      "columns": 1,
+      "rows": 1,
+      "frames": 1
+    },
+    "glow_red": {
+      "file": "glow_red.png",
+      "kind": "glow",
+      "w": 64,
+      "h": 64,
+      "cell": [
+        64,
+        64
+      ],
+      "columns": 1,
+      "rows": 1,
+      "frames": 1
+    },
+    "glow_amber": {
+      "file": "glow_amber.png",
+      "kind": "glow",
+      "w": 64,
+      "h": 64,
+      "cell": [
+        64,
+        64
+      ],
+      "columns": 1,
+      "rows": 1,
+      "frames": 1
+    },
+    "glow_power": {
+      "file": "glow_power.png",
+      "kind": "glow",
+      "w": 64,
+      "h": 64,
+      "cell": [
+        64,
+        64
+      ],
+      "columns": 1,
+      "rows": 1,
+      "frames": 1
+    }
+  },
+  "controls": [
+    {
+      "id": "tubes",
+      "type": "glow",
+      "x": 640.0,
+      "y": 246.0,
+      "w": 780,
+      "h": 206,
+      "asset": "glow_tubes",
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "add",
+      "source": "power",
+      "on_value": 1,
+      "requires": "power"
+    },
+    {
+      "id": "pre_rhythm",
+      "type": "knob",
+      "x": 225,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_left",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "pre_lead",
+      "type": "knob",
+      "x": 425,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_left",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "low",
+      "type": "knob",
+      "x": 511,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_left",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "mid",
+      "type": "knob",
+      "x": 593,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_left",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "high",
+      "type": "knob",
+      "x": 675,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_right",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "post_rhythm",
+      "type": "knob",
+      "x": 762,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_right",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "post_lead",
+      "type": "knob",
+      "x": 844,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_right",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "resonance",
+      "type": "knob",
+      "x": 931,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_right",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "presence",
+      "type": "knob",
+      "x": 1013,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_right",
+      "frames": 97,
+      "columns": 10,
+      "rows": 10,
+      "hit": [
+        74,
+        82
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "pre_rhythm_light",
+      "type": "knob_light",
+      "x": 225,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 0
+    },
+    {
+      "id": "pre_lead_light",
+      "type": "knob_light",
+      "x": 425,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 1
+    },
+    {
+      "id": "low_light",
+      "type": "knob_light",
+      "x": 511,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 2
+    },
+    {
+      "id": "mid_light",
+      "type": "knob_light",
+      "x": 593,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 3
+    },
+    {
+      "id": "high_light",
+      "type": "knob_light",
+      "x": 675,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 4
+    },
+    {
+      "id": "post_rhythm_light",
+      "type": "knob_light",
+      "x": 762,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 5
+    },
+    {
+      "id": "post_lead_light",
+      "type": "knob_light",
+      "x": 844,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 6
+    },
+    {
+      "id": "resonance_light",
+      "type": "knob_light",
+      "x": 931,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 7
+    },
+    {
+      "id": "presence_light",
+      "type": "knob_light",
+      "x": 1013,
+      "y": 410.0,
+      "w": 60,
+      "h": 64,
+      "asset": "knob_light",
+      "frames": 9,
+      "columns": 9,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "frame": 8
+    },
+    {
+      "id": "bright",
+      "type": "button",
+      "x": 291,
+      "y": 378,
+      "w": 40,
+      "h": 40,
+      "asset": "button_bright",
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "hit": [
+        46,
+        40
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "crunch",
+      "type": "button",
+      "x": 291,
+      "y": 430,
+      "w": 40,
+      "h": 40,
+      "asset": "button_crunch",
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "hit": [
+        46,
+        40
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "channel",
+      "type": "button",
+      "x": 351,
+      "y": 432,
+      "w": 40,
+      "h": 40,
+      "asset": "button_channel",
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "hit": [
+        46,
+        40
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "input_jack",
+      "type": "toggle",
+      "x": 160,
+      "y": 410,
+      "w": 52,
+      "h": 88,
+      "asset": "toggle",
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "hit": [
+        42,
+        88
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "standby",
+      "type": "rocker",
+      "x": 1090,
+      "y": 427,
+      "w": 52,
+      "h": 80,
+      "asset": "rocker_standby",
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "hit": [
+        54,
+        62
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "power",
+      "type": "rocker",
+      "x": 1154,
+      "y": 427,
+      "w": 52,
+      "h": 80,
+      "asset": "rocker_power",
+      "frames": 2,
+      "columns": 2,
+      "rows": 1,
+      "hit": [
+        54,
+        62
+      ],
+      "blend": "over"
+    },
+    {
+      "id": "lamp_rhythm",
+      "type": "glow",
+      "x": 330,
+      "y": 374,
+      "w": 64,
+      "h": 64,
+      "asset": "glow_green",
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "source": "channel",
+      "on_value": 0,
+      "requires": "power"
+    },
+    {
+      "id": "lamp_lead",
+      "type": "glow",
+      "x": 330,
+      "y": 394,
+      "w": 64,
+      "h": 64,
+      "asset": "glow_red",
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "source": "channel",
+      "on_value": 1,
+      "requires": "power"
+    },
+    {
+      "id": "lamp_standby",
+      "type": "glow",
+      "x": 1090,
+      "y": 378,
+      "w": 64,
+      "h": 64,
+      "asset": "glow_amber",
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "source": "standby",
+      "on_value": 1,
+      "requires": "power"
+    },
+    {
+      "id": "lamp_power",
+      "type": "glow",
+      "x": 1154,
+      "y": 378,
+      "w": 64,
+      "h": 64,
+      "asset": "glow_power",
+      "frames": 1,
+      "columns": 1,
+      "rows": 1,
+      "hit": [
+        0,
+        0
+      ],
+      "blend": "over",
+      "source": "power",
+      "on_value": 1,
+      "requires": "power"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Scoured",
+  "category": "Rhythm",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 5.0,
+    "post_lead": 3.5,
+    "low": 6.8,
+    "mid": 1.8,
+    "high": 7.0,
+    "resonance": 6.0,
+    "presence": 6.2,
+    "output_level": 2.4,
+    "gate_threshold": -68
+  }
+}

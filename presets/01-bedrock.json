@@ -1,0 +1,10 @@
+{
+  "name": "Bedrock",
+  "category": "Start here",
+  "params": {},
+  "pedal": {},
+  "eq": {},
+  "cab": {
+    "cab_on": 1
+  }
+}

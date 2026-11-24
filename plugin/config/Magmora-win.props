@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <PLUGIN_DIR>$(MSBuildThisFileDirectory)..\</PLUGIN_DIR>
+    <IPLUG2_ROOT>$(MSBuildThisFileDirectory)..\..\third_party\iPlug2</IPLUG2_ROOT>
+    <!-- The product name has one definition: PLUG_NAME in plugin/config.h -->
+    <MAGMORA_CONFIG_H>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)..\config.h'))</MAGMORA_CONFIG_H>
+    <BINARY_NAME>$([System.Text.RegularExpressions.Regex]::Match($(MAGMORA_CONFIG_H), '#define PLUG_NAME \x22([^\x22]+)').Groups[1].Value)</BINARY_NAME>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(IPLUG2_ROOT)\common-win.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <TargetName>$(BINARY_NAME)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(PLUGIN_DIR);$(PLUGIN_DIR)resources;$(PLUGIN_DIR)..\dsp\include;$(IPLUG_PATH);$(EXTRAS_PATH);$(WDL_PATH);$(IGRAPHICS_PATH);$(IGRAPHICS_PATH)\Controls;$(IGRAPHICS_PATH)\Drawing;$(IGRAPHICS_PATH)\Platforms;$(NANOSVG_PATH);$(NANOVG_PATH);$(STB_PATH);$(GLAD_GL2_PATHS);$(IPLUG_PATH)\VST3;$(VST3_SDK);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IGRAPHICS_NANOVG;IGRAPHICS_GL2;$(VST3_DEFS);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(PLUGIN_DIR);$(PLUGIN_DIR)resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>$(MAGMORA_DSP_LIB);opengl32.lib;wininet.lib;comctl32.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

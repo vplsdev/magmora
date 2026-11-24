@@ -1,0 +1,19 @@
+{
+  "name": "Low Quake",
+  "category": "Rhythm",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 4.6,
+    "post_lead": 3.4,
+    "low": 6.5,
+    "mid": 3.5,
+    "high": 5.8,
+    "resonance": 7.2,
+    "presence": 5.2,
+    "output_level": 2.7,
+    "gate_threshold": -66
+  }
+}

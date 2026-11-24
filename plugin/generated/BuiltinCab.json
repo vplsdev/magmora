@@ -1,0 +1,52 @@
+{
+ "name": "Trad 4x12 (modelled)",
+ "microphone": "57-type",
+ "reference": "builtin:trad-4x12-modelled",
+ "model": "proto/cab/model8.py, stage r8a",
+ "model_fingerprint": "1a1824ea7a9a9376",
+ "parameters": "tuned_r8a.json",
+ "generator": "proto/cab/make_builtin_pack.py",
+ "speakers": [
+  "LL",
+  "LR",
+  "UL",
+  "UR"
+ ],
+ "speaker_note": "LL, LR, UL: their own unit values (r8a); UR: the shared values",
+ "cap_in": [
+  0.0,
+  0.25,
+  0.5,
+  0.75,
+  1.0,
+  1.25,
+  1.5,
+  1.75,
+  2.0
+ ],
+ "grille_in": [
+  0.0,
+  0.5,
+  1.0
+ ],
+ "files": 108,
+ "sample_rate": 48000,
+ "frames": 4096,
+ "sample_format": "float32",
+ "scale": "one scale for the pack, peak 1.0; relative levels are the model's",
+ "bytes": 1769472,
+ "samples_sha256": "4964cd1a563ea62ed5a8f44f349cdc3835e61d1867beede6aae1a238abe56dce",
+ "mapping": {
+  "phase": "aligned",
+  "schemes": [
+   {
+    "regex": "^(?P<mic>57-type) (?P<speaker>LL|LR|UL|UR) (?P<x>[0-9.]+)in (?P<dist>[0-9.]+)in$",
+    "units": {
+     "x": "in",
+     "dist": "in"
+    }
+   }
+  ]
+ },
+ "known_limits": "fails the clean grille gate (0.68 against 0.89); holdouts not opened"
+}

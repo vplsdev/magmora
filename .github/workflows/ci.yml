@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    name: Linux (DSP, tests, tools)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --parallel 4
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+  macos:
+    name: macOS (DSP, APP, AU, VST3, license audit)
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      BLOCKAMP_PRIVATE: ${{ github.workspace }}/.tools
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Configure
+        run: cmake -S . -B "$BLOCKAMP_PRIVATE/build/core" -G Ninja
+      - name: Build
+        run: cmake --build "$BLOCKAMP_PRIVATE/build/core" --parallel 4
+      - name: Test
+        run: ctest --test-dir "$BLOCKAMP_PRIVATE/build/core" --output-on-failure
+      - name: Generated plug-in sources are up to date
+        # plugin/generated is committed for the Visual Studio project; this fails if layout.json, presets/ or
+        # Params.h changed without running the generator.
+        run: python3 plugin/scripts/generate.py --check
+      - name: Build plug-ins (ad-hoc signed)
+        run: plugin/scripts/build_mac.sh
+      - name: License audit
+        run: python3 scripts/license_audit.py
+      - name: Validate the Audio Unit
+        # auval only sees installed components. This copy is made on the throwaway runner only.
+        if: runner.environment == 'github-hosted'
+        run: |
+          name="$(python3 plugin/scripts/product.py get BUNDLE_NAME)"
+          dest="$HOME/Library/Audio/Plug-Ins/Components"
+          mkdir -p "$dest"
+          cp -R "$BLOCKAMP_PRIVATE/build/plugin/products/Release/$name.component" "$dest/"
+          killall -9 AudioComponentRegistrar || true
+          auval -v aufx MgAp Mgmr
+
+  windows:
+    name: Windows (DSP, tests, VST3)
+    runs-on: windows-2022
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Configure
+        run: cmake -S . -B build -A x64
+      - name: Build
+        run: cmake --build build --config Release --parallel 4
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Build VST3
+        shell: pwsh
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $msbuild = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild -find 'MSBuild\**\Bin\MSBuild.exe' | Select-Object -First 1
+          & $msbuild plugin\projects\Magmora-vst3.vcxproj /m:4 /p:Configuration=Release /p:Platform=x64 "/p:MAGMORA_DSP_LIB=$PWD\build\dsp\Release\magmora_dsp.lib"
+          exit $LASTEXITCODE

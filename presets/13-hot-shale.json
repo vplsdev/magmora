@@ -1,0 +1,18 @@
+{
+  "name": "Hot Shale",
+  "category": "Crunch",
+  "params": {
+    "channel": 0,
+    "bright": 1,
+    "crunch": 1,
+    "input_jack": 0,
+    "pre_rhythm": 3.0,
+    "post_rhythm": 5.0,
+    "low": 5.0,
+    "mid": 5.5,
+    "high": 6.0,
+    "resonance": 5.0,
+    "presence": 5.5,
+    "output_level": -0.7
+  }
+}

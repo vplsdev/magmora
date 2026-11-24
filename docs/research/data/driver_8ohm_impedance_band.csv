@@ -1,0 +1,28 @@
+# M. Zollner, Physics of the Electric Guitar (GITEC translation, 2014), section 11.2, Fig. 11.9 upper left:
+# impedance magnitude of several 12-inch 8-ohm guitar speakers of the reference driver's maker [N11], un-mounted, anechoic, low level.
+# Digitised by us: lowest, median and highest trace of the family at each frequency (ohm). Reading uncertainty about 3 %.
+# Below 200 Hz the traces differ too much (resonance 72 to 113 Hz, peaks 75 to 150 ohm) to give a band.
+f_Hz,z_low_ohm,z_median_ohm,z_high_ohm
+200,7.5,8.2,10.9
+250,6.8,7.6,9.0
+300,6.7,7.5,8.3
+350,6.8,7.6,8.1
+400,6.9,7.7,8.1
+500,7.3,8.1,8.6
+600,7.8,8.7,9.5
+700,8.2,9.6,11.5
+800,8.7,10.1,11.4
+1000,9.4,9.9,11.0
+1250,10.0,10.6,11.6
+1500,10.5,11.1,13.7
+2000,12.7,13.4,15.4
+2500,14.5,15.3,16.5
+3000,13.8,15.8,17.2
+4000,15.1,17.3,19.2
+5000,16.5,18.7,21.5
+6000,18.7,20.6,23.8
+8000,21.1,24.3,28.6
+10000,23.7,27.7,32.5
+12000,26.1,30.8,36.3
+15000,29.6,35.2,41.6
+18000,32.7,39.0,46.3

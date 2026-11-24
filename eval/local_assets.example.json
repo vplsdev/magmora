@@ -1,0 +1,4 @@
+{
+ "_comment": "Copy to local_assets.json (git-ignored). Paths are relative to $BLOCKAMP_ASSETS unless absolute. 'di' is a dry guitar recording (48 kHz), read by bench/run_bench.py and plugin/scripts/level_presets.py.",
+ "di": "path/to/di.wav"
+}

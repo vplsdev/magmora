@@ -1,0 +1,19 @@
+# Polar patterns read by eye by us from the same two sheets as the on-axis curves ([N8] 57-type sheet, figure "Polar Pattern";
+# [N9] 421-type specification v1.1, figure "Polar pattern"), at 90 and 180 degrees. Reading uncertainty about 2 dB, more
+# below -15 dB. alpha is the pressure share of a first-order pattern alpha + (1 - alpha) cos(theta) that we fitted to
+# the two readings (90 degrees: 20 log alpha; 180 degrees: 20 log |2 alpha - 1|); where the two disagree the value is a
+# compromise and marked est. At 8 kHz and above the patterns are not first-order (diffraction) and alpha is nominal.
+mic,f_Hz,dB_at_90,dB_at_180,alpha,note
+57type,125,-3.5,-11,0.65,
+57type,500,-5.5,-20,0.54,
+57type,1000,-5,-17,0.56,
+57type,2000,-5.5,-19.5,0.54,
+57type,4000,-6.5,-14.5,0.45,
+57type,8000,-6,-10.7,0.50,est (not first-order)
+421type,125,-0.7,-6.5,0.80,est (readings give 0.92 and 0.74)
+421type,250,-2.4,-12.3,0.68,est (readings give 0.76 and 0.62)
+421type,500,-3.7,-23,0.58,est
+421type,1000,-3.7,-25,0.58,est
+421type,2000,-3.7,-23,0.58,est
+421type,4000,-5.2,-17,0.55,
+421type,8000,-5.7,-16.5,0.52,est (not first-order)

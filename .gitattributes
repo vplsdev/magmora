@@ -1,0 +1,9 @@
+* text=auto eol=lf
+# byte-exact: the licence audit checks these against MANIFEST.sha256
+third_party/** -text
+*.ttf binary
+*.otf binary
+*.png binary
+*.jpg binary
+*.f32 binary
+*.f64 binary

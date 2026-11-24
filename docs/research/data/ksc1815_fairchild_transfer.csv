@@ -1,0 +1,26 @@
+# Fairchild KSC1815 data sheet (second source of the Toshiba 2SC1815), rev. A2, September 2002, page 2, figure 2
+# 'Transfer characteristic', IC against VBE at VCE = 6 V. Digitised by us from the vector curve of the PDF (opened 23 Nov 2026).
+# Same page, figure 3: hFE is flat at 200 from 1 mA to about 80 mA (the curve lies on the 200 grid line). Page 1: hFE classes
+# O 70-140, Y 120-240, GR 200-400, L 350-700 at 2 mA.
+vbe_V,ic_A
+0.5902,0.0001
+0.6264,0.000356451
+0.6303,0.000403645
+0.6343,0.000460257
+0.6382,0.000532108
+0.6431,0.000615177
+0.6470,0.000711214
+0.6519,0.000833681
+0.6558,0.00097051
+0.6754,0.00188365
+0.7047,0.00530884
+0.7243,0.0103039
+0.7282,0.0120781
+0.7331,0.0140605
+0.7370,0.0163682
+0.7419,0.0189234
+0.7458,0.021727
+0.7498,0.0247742
+0.7537,0.0280543
+0.7566,0.03155
+0.7899,0.1

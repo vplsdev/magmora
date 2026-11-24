@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- VST3 for Windows x64. Pass /p:MAGMORA_DSP_LIB=<path to magmora_dsp.lib from CMake>. No install step. -->
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5C0B1A43-6E2D-4C39-9B0E-2F6D4B7A1E03}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Release'">false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="..\config\Magmora-win.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <MAGMORA_BUILD_ROOT Condition="'$(MAGMORA_BUILD_ROOT)'==''">$(MSBuildThisFileDirectory)..\..\build\plugin-win\</MAGMORA_BUILD_ROOT>
+    <OutDir>$(MAGMORA_BUILD_ROOT)$(Configuration)\</OutDir>
+    <IntDir>$(MAGMORA_BUILD_ROOT)obj\$(Configuration)\</IntDir>
+    <TargetExt>.vst3</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>$(DEBUG_DEFS);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>$(RELEASE_DEFS);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Magmora.cpp" />
+    <ClCompile Include="..\ui\MagmoraUI.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\IPlugAPIBase.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\IPlugParameter.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\IPlugPaths.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\IPlugPluginBase.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\IPlugProcessor.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\IPlugTimer.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\VST3\IPlugVST3.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IPlug\VST3\IPlugVST3_ProcessorBase.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IGraphics\IControl.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IGraphics\IGraphics.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IGraphics\IGraphicsEditorDelegate.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IGraphics\Controls\IControls.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IGraphics\Controls\IPopupMenuControl.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IGraphics\Controls\ITextEntryControl.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\IGraphics\Platforms\IGraphicsWin.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\baseiids.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\fbuffer.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\fdebug.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\fdynlib.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\fobject.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\fstreamer.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\fstring.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\timer.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\source\updatehandler.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\thread\source\fcondition.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\base\thread\source\flock.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\conststringtable.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\coreiids.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\funknown.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\pluginterfaces\base\ustring.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\common\memorystream.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\common\pluginview.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\common\commoniids.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\main\dllmain.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\main\pluginfactory.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstaudioeffect.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstbus.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstcomponent.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstcomponentbase.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstinitiids.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstnoteexpressiontypes.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstparameters.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstrepresentation.cpp" />
+    <ClCompile Include="..\..\third_party\iPlug2\Dependencies\IPlug\VST3_SDK\public.sdk\source\vst\vstsinglecomponenteffect.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\resources\main.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Target Name="MakeBundle" AfterTargets="Link">
+    <Copy SourceFiles="$(OutDir)$(TargetName)$(TargetExt)" DestinationFolder="$(OutDir)bundle\$(TargetName).vst3\Contents\x86_64-win" />
+  </Target>
+</Project>

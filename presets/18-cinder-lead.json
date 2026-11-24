@@ -1,0 +1,41 @@
+{
+  "name": "Cinder Lead",
+  "category": "Full chain",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "low": 5.0,
+    "mid": 6.5,
+    "high": 5.0,
+    "post_lead": 4.0,
+    "resonance": 5.0,
+    "presence": 5.5,
+    "output_level": -1.1,
+    "pre_lead": 6.0,
+    "gate_threshold": -72.0
+  },
+  "pedal": {
+    "pedal_on": 1,
+    "pedal_drive": 3.0,
+    "pedal_tone": 5.0,
+    "pedal_level": 6.5
+  },
+  "eq": {
+    "eq_on": 1,
+    "eq_hp_freq": 70.0,
+    "eq_hp_slope": 1,
+    "eq_lp_freq": 12000.0,
+    "eq_lp_slope": 1,
+    "eq_b2_freq": 400.0,
+    "eq_b2_gain": -2.0,
+    "eq_b2_q": 1.0,
+    "eq_b3_freq": 1600.0,
+    "eq_b3_gain": 2.0,
+    "eq_b3_q": 0.8
+  },
+  "cab": {
+    "cab_on": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Rime",
+  "category": "Clean",
+  "params": {
+    "channel": 0,
+    "bright": 1,
+    "crunch": 0,
+    "input_jack": 1,
+    "pre_rhythm": 1.8,
+    "post_rhythm": 9.0,
+    "low": 4.0,
+    "mid": 4.0,
+    "high": 6.5,
+    "resonance": 4.0,
+    "presence": 6.5,
+    "output_level": 11.7
+  }
+}

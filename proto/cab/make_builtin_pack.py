@@ -1,0 +1,179 @@
+"""The built-in cabinet: the round-8 model (r8a) rendered on the position grid the virtual microphone needs, written
+as plugin/generated/BuiltinCab.inc (compiled into the plug-in) and a manifest. Described in docs/research/CABINET.md.
+
+    $BLOCKAMP_PY proto/cab/make_builtin_pack.py [--params proto/cab/tuned_r8a.json] [--wav-dir DIR] [--check-only]
+
+What is shipped: responses our model computes from its physical parameters (the r8a values in proto/cab/tuned_r8a.json,
+fitted within physical ranges and fixed tolerances). No recording is opened, copied or processed.
+
+Grid: four cones (LL, LR, UL with their own unit values, UR with the shared ones), the microphone on the axis at 0 to
+2 in from the cap centre in 0.25 in steps and 0 / 0.5 / 1 in off the grille: 4 x 9 x 3 = 108 responses, one
+microphone ("57-type"). Neighbours are 6.35 mm apart across the cone and 12.7 mm apart off the grille, so the virtual
+microphone morphs between all of them (at most 12.7 mm). 4096 taps at 48 kHz (85 ms, the model's own length,
+model.NTAPS), float32. The model's relative levels between positions and cones are kept: one scale for the whole pack
+(peak 1.0), not one per file.
+
+--wav-dir: also write the pack as WAV files and a mapping file (under $BLOCKAMP_PRIVATE; for the developer tools).
+--check: also prints how far each response is, after peak normalisation, from the same position in a stage folder
+rendered earlier from the same model (skipped when that folder does not exist).
+--check-only: render and compare the samples' hash with the committed manifest, without writing anything.
+"""
+import argparse, hashlib, json, os, re, sys
+from pathlib import Path
+import numpy as np
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
+sys.path.insert(0, str(HERE))
+import model as M, model5 as M5, model7 as M7, model8 as M8  # noqa: E402
+
+FINGERPRINT = "1a1824ea7a9a9376"   # r8a
+INCH = 0.0254
+NAME = "Trad 4x12 (modelled)"
+MIC = "57-type"
+REFERENCE = "builtin:trad-4x12-modelled"   # what a session saves as the pack's folder
+CAPS = [0.25 * i for i in range(9)]       # in, across the cone from the cap centre
+GRILLE = (0.0, 0.5, 1.0)                  # in, off the grille cloth
+MAPPING = {
+    "phase": "aligned",
+    "schemes": [{"regex": r"^(?P<mic>57-type) (?P<speaker>LL|LR|UL|UR) (?P<x>[0-9.]+)in (?P<dist>[0-9.]+)in$",
+                 "units": {"x": "in", "dist": "in"}}],
+}
+# Maker and model names that must not appear in what ships, known only by digest (SHA-256, first 16 hex digits, of
+# the lower-case word or two words), as scripts/license_audit.py keeps product names.
+BANNED = {"73e29454bd930074", "74d8b9d068a56fbe", "0840d5a4c86aa1a0", "438c98507088aafe", "3258c35df927756b", "7e002cc92f0f8ad3", "f30a32ce3bf65d4a", "710afee7e7615616", "6ca879b0e26d002e"}
+
+
+def named(text):
+    w = re.findall(r"[a-z0-9]+", text.lower())
+    return any(hashlib.sha256(c.encode()).hexdigest()[:16] in BANNED for c in w + [" ".join(p) for p in zip(w, w[1:])])
+
+
+def fingerprint(obj):  # the fingerprint of a model's stage record
+    return hashlib.sha256(json.dumps(obj, sort_keys=True, default=str).encode()).hexdigest()[:16]
+
+
+def values(params_path):
+    """The values and the stage record exactly as the round-8 renderer built them (so the fingerprint is the round's)."""
+    v = {**M7.OFF7, **json.loads(Path(params_path).read_text())["values"]}
+    dv = M8.deviations(v)
+    v = {**{k: x for k, x in v.items() if not k.startswith("u_")}, **{M8.key8(s, k): dv[s][k] for s in M8.UNITS for k in M8.UNIT_KEYS}}
+    fixed = {k: x for k, x in sorted({**M5.P5, **M7.P7}.items()) if k not in v}
+    record = dict(stage="r8a", values=v, fixed=fixed, layers=dict(M5.STAGE5["r5d"], top=True, units=True), tolerances=M8.TOL8,
+                  unit_values={s: {k: M8.unit_values(v, s)[k] for k in M8.UNIT_KEYS} for s in M8.UNITS},
+                  moving_mass_g={s: 1e3 * M8.moving_mass(v, s) for s in M8.UNITS},
+                  model="model8 (model7 r7a2 plus unit tolerance; the held-out unit carries the shared values)")
+    return v, record
+
+
+def response(v, speaker, cap_in, grille_in):
+    """M7.impulse_response without its per-file peak normalisation."""
+    H = M8.response(v, "57", cap_in * INCH, v["grille_gap"] + grille_in * INCH, 0.0, speaker)
+    h = np.fft.irfft(H, M.NFFT)[: M.NTAPS].copy()
+    h[-512:] *= 0.5 * (1 + np.cos(np.linspace(0, np.pi, 512)))
+    return h
+
+
+def file_name(speaker, cap, grille):
+    return f"{MIC} {speaker} {cap:.2f}in {grille:.1f}in.wav"
+
+
+def render(v):
+    names, rows = [], []
+    for sp in M8.UNITS:
+        for c in CAPS:
+            for g in GRILLE:
+                names.append(file_name(sp, c, g))
+                rows.append(response(v, sp, c, g))
+    data = np.array(rows)
+    data /= np.abs(data).max()
+    return names, data.astype(np.float32)
+
+
+def inc_text(names, data, manifest):
+    words = data.reshape(-1).view("<u4")
+    lines = [f"// Generated by proto/cab/make_builtin_pack.py. Do not edit.",
+             f"// The built-in cabinet: {NAME}, microphone {MIC}. Responses computed by the round-8 cabinet model",
+             f"// (r8a, fingerprint {manifest['model_fingerprint']}) from physical parameters; no recording is included.",
+             f"// {len(names)} responses x {data.shape[1]} samples at {M.FS} Hz, float32 bit patterns. Manifest: BuiltinCab.json.",
+             "namespace builtin_cab {",
+             f'constexpr const char* kName = "{NAME}";',
+             f'constexpr const char* kReference = "{REFERENCE}";',
+             f'constexpr const char* kFingerprint = "{manifest["model_fingerprint"]}";',
+             f"constexpr double kRate = {float(M.FS)!r};",
+             f"constexpr int kFrames = {data.shape[1]};",
+             f"constexpr int kFiles = {len(names)};",
+             'constexpr const char* kMapping = R"json(' + json.dumps(MAPPING) + ')json";',
+             "constexpr const char* kNames[kFiles] = {"]
+    lines += [f'    "{n}",' for n in names]
+    lines += ["};", "alignas(4) constexpr unsigned int kSamples[kFiles * kFrames] = {"]
+    for i in range(0, len(words), 12):
+        lines.append("    " + ",".join(f"0x{w:08x}" for w in words[i:i + 12]) + ",")
+    lines += ["};", "}  // namespace builtin_cab", ""]
+    return "\n".join(lines)
+
+
+def check_stage(names, data, priv):
+    stage = priv / "expansion" / "cab" / "stage_r8a" / "posref"
+    if not stage.is_dir():
+        print("check: no stage folder", stage)
+        return
+    import soundfile as sf
+    worst = 0.0
+    for n, h in zip(names, data):
+        _, sp, c, g = n[:-4].split(" ")
+        ref, _ = sf.read(str(stage / f"{sp}_{float(c[:-2]):.2f}_{float(g[:-2]):.1f}.wav"), dtype="float32")
+        worst = max(worst, float(np.max(np.abs(h / np.abs(h).max() - ref))))
+    print(f"check: against the round's stage_r8a, after peak normalisation: worst difference {worst:.1e} of peak")
+
+
+def main():
+    priv = Path(os.environ.get("BLOCKAMP_PRIVATE") or ROOT / ".tools")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--params", default=str(HERE / "tuned_r8a.json"))
+    ap.add_argument("--wav-dir", default=str(priv / "expansion" / "cab" / "builtin_r8a"),
+                    help="also write the pack as WAV files and a mapping file here (private; for the tools)")
+    ap.add_argument("--check", action="store_true")
+    ap.add_argument("--check-only", action="store_true")
+    a = ap.parse_args()
+    v, record = values(a.params)
+    fp = fingerprint(record)
+    if fp != FINGERPRINT:
+        sys.exit(f"model fingerprint {fp}, expected {FINGERPRINT}: not the r8a model")
+    names, data = render(v)
+    for text in names + [NAME, MIC, json.dumps(MAPPING)]:
+        if named(text):
+            sys.exit(f"brand name in {text!r}")
+    digest = hashlib.sha256(data.tobytes()).hexdigest()
+    out = ROOT / "plugin" / "generated"
+    manifest = dict(
+        name=NAME, microphone=MIC, reference=REFERENCE, model="proto/cab/model8.py, stage r8a",
+        model_fingerprint=fp, parameters=Path(a.params).name, generator="proto/cab/make_builtin_pack.py",
+        speakers=list(M8.UNITS), speaker_note="LL, LR, UL: their own unit values (r8a); UR: the shared values",
+        cap_in=CAPS, grille_in=list(GRILLE), files=len(names), sample_rate=M.FS, frames=int(data.shape[1]),
+        sample_format="float32", scale="one scale for the pack, peak 1.0; relative levels are the model's",
+        bytes=int(data.nbytes), samples_sha256=digest, mapping=MAPPING,
+        known_limits="fails the clean grille gate (0.68 against 0.89); holdouts not opened")
+    if a.check_only:
+        old = json.loads((out / "BuiltinCab.json").read_text())
+        print("samples sha256", "matches the manifest" if old["samples_sha256"] == digest else "DIFFERS from the manifest")
+        check_stage(names, data, priv)
+        return
+    (out / "BuiltinCab.inc").write_text(inc_text(names, data, manifest))
+    (out / "BuiltinCab.json").write_text(json.dumps(manifest, indent=1) + "\n")
+    if a.wav_dir:
+        import soundfile as sf
+        d = Path(a.wav_dir)
+        assert priv.resolve() in d.resolve().parents, "the WAV copy goes under $BLOCKAMP_PRIVATE"
+        d.mkdir(parents=True, exist_ok=True)
+        for n, h in zip(names, data):
+            sf.write(str(d / n), h, M.FS, subtype="FLOAT")
+        (d / "magmora-positions.json").write_text(json.dumps(MAPPING, indent=1) + "\n")
+    print(f"{len(names)} responses, {data.shape[1]} samples at {M.FS} Hz, {data.nbytes / 1e6:.2f} MB; fingerprint {fp}; "
+          f"sha256 {digest[:16]}; wrote {out / 'BuiltinCab.inc'}" + (f" and {a.wav_dir}" if a.wav_dir else ""))
+    if a.check:
+        check_stage(names, data, priv)
+
+
+if __name__ == "__main__":
+    main()

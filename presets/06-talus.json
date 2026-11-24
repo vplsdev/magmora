@@ -1,0 +1,19 @@
+{
+  "name": "Talus",
+  "category": "Rhythm",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 4.0,
+    "post_lead": 4.0,
+    "low": 4.2,
+    "mid": 7.2,
+    "high": 5.0,
+    "resonance": 4.5,
+    "presence": 4.4,
+    "output_level": -0.3,
+    "gate_threshold": -70
+  }
+}

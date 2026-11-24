@@ -1,0 +1,325 @@
+{
+  "allowed": [
+    "MIT",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "Zlib",
+    "ISC",
+    "Apache-2.0",
+    "BSL-1.0",
+    "Public-Domain",
+    "Unlicense"
+  ],
+  "allowed_fonts": [
+    "OFL-1.1"
+  ],
+  "components": [
+    {
+      "id": "iplug2",
+      "name": "iPlug 2",
+      "licenses": [
+        "Zlib"
+      ],
+      "copyright": "the iPlug 2 developers; portions Oli Larkin, John Schwartz, Cockos",
+      "text": "third_party/licenses/iPlug2.txt",
+      "files": [
+        "third_party/iPlug2/LICENSE.txt",
+        "third_party/iPlug2/common-mac.xcconfig",
+        "third_party/iPlug2/common-win.props",
+        "third_party/iPlug2/Scripts/*",
+        "third_party/iPlug2/VENDORED.md",
+        "third_party/iPlug2/MANIFEST.sha256",
+        "third_party/iPlug2/IPlug/IPlug*",
+        "third_party/iPlug2/IPlug/ISender.h",
+        "third_party/iPlug2/IPlug/APP/*",
+        "third_party/iPlug2/IPlug/AUv2/IPlugAU*",
+        "third_party/iPlug2/IPlug/VST3/*",
+        "third_party/iPlug2/IPlug/Extras/DCBlocker.h",
+        "third_party/iPlug2/IPlug/Extras/Easing.h",
+        "third_party/iPlug2/IPlug/Extras/NChanDelay.h",
+        "third_party/iPlug2/IPlug/Extras/Smoothers.h",
+        "third_party/iPlug2/IGraphics/I*",
+        "third_party/iPlug2/IGraphics/Controls/*",
+        "third_party/iPlug2/IGraphics/Drawing/*",
+        "third_party/iPlug2/IGraphics/Platforms/*"
+      ],
+      "url": "https://github.com/iPlug2/iPlug2"
+    },
+    {
+      "id": "wdl",
+      "name": "Cockos WDL and SWELL",
+      "licenses": [
+        "Zlib"
+      ],
+      "copyright": "Cockos Incorporated",
+      "text": "third_party/licenses/WDL.txt",
+      "files": [
+        "third_party/iPlug2/WDL/*"
+      ],
+      "url": "https://www.cockos.com/wdl/",
+      "note": "Every file must also be on the reviewed list wdl_files."
+    },
+    {
+      "id": "vst3",
+      "name": "Steinberg VST 3 SDK 3.8.1",
+      "licenses": [
+        "MIT"
+      ],
+      "copyright": "2026 Steinberg Media Technologies GmbH",
+      "text": "third_party/licenses/VST3_SDK.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IPlug/VST3_SDK/*"
+      ],
+      "url": "https://github.com/steinbergmedia/vst3sdk"
+    },
+    {
+      "id": "rtaudio",
+      "name": "RtAudio",
+      "licenses": [
+        "MIT"
+      ],
+      "copyright": "2001-2019 Gary P. Scavone",
+      "text": "third_party/licenses/RtAudio.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IPlug/RTAudio/RtAudio.*",
+        "third_party/iPlug2/Dependencies/IPlug/RTAudio/README.md"
+      ],
+      "url": "https://github.com/thestk/rtaudio"
+    },
+    {
+      "id": "rtmidi",
+      "name": "RtMidi",
+      "licenses": [
+        "MIT"
+      ],
+      "copyright": "2003-2019 Gary P. Scavone",
+      "text": "third_party/licenses/RtMidi.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IPlug/RTMidi/RtMidi.*",
+        "third_party/iPlug2/Dependencies/IPlug/RTMidi/README.md"
+      ],
+      "url": "https://github.com/thestk/rtmidi"
+    },
+    {
+      "id": "nanovg",
+      "name": "NanoVG and fontstash",
+      "licenses": [
+        "Zlib"
+      ],
+      "copyright": "2009-2013 Mikko Mononen",
+      "text": "third_party/licenses/NanoVG.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IGraphics/NanoVG/LICENSE.txt",
+        "third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/nanovg*",
+        "third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/fontstash.h"
+      ],
+      "url": "https://github.com/memononen/nanovg"
+    },
+    {
+      "id": "nanosvg",
+      "name": "NanoSVG",
+      "licenses": [
+        "Zlib"
+      ],
+      "copyright": "2013-14 Mikko Mononen",
+      "text": "third_party/licenses/NanoSVG.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IGraphics/NanoSVG/*"
+      ],
+      "url": "https://github.com/memononen/nanosvg"
+    },
+    {
+      "id": "metalnanovg",
+      "name": "MetalNanoVG",
+      "licenses": [
+        "MIT"
+      ],
+      "copyright": "2017 Ollix",
+      "text": "third_party/licenses/MetalNanoVG.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IGraphics/MetalNanoVG/*"
+      ],
+      "url": "https://github.com/ollix/MetalNanoVG",
+      "note": "mnvg_bitcode/macos.h is the compiled form of nanovg_mtl_shaders.metal."
+    },
+    {
+      "id": "stb",
+      "name": "stb_image, stb_truetype, stb_textedit",
+      "licenses": [
+        "Public-Domain",
+        "MIT"
+      ],
+      "copyright": "Sean Barrett and contributors",
+      "text": "third_party/licenses/stb.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/stb_*.h",
+        "third_party/iPlug2/Dependencies/IGraphics/STB/stb_textedit.h"
+      ],
+      "url": "https://github.com/nothings/stb"
+    },
+    {
+      "id": "dfx",
+      "name": "Destroy FX AU Utilities",
+      "licenses": [
+        "BSD-3-Clause"
+      ],
+      "copyright": "2003-2008 Sophia Poirier",
+      "text": "third_party/licenses/dfx-au-utilities.txt",
+      "files": [
+        "third_party/iPlug2/IPlug/AUv2/dfx-au-utilities.*"
+      ]
+    },
+    {
+      "id": "glad",
+      "name": "glad generated GL 2.1 loader and khrplatform.h",
+      "licenses": [
+        "MIT",
+        "Apache-2.0",
+        "Public-Domain"
+      ],
+      "copyright": "2013-2021 David Herberth; The Khronos Group",
+      "text": "third_party/licenses/glad.txt",
+      "files": [
+        "third_party/iPlug2/Dependencies/IGraphics/glad_GL2/*"
+      ],
+      "url": "https://github.com/Dav1dde/glad",
+      "note": "Windows only."
+    },
+    {
+      "id": "redsweater",
+      "name": "Red Sweater vertically centred text cell",
+      "licenses": [
+        "MIT"
+      ],
+      "copyright": "2006 Red Sweater Software",
+      "text": "third_party/licenses/RedSweater.txt",
+      "files": [
+        "third_party/iPlug2/IGraphics/Platforms/IGraphicsMac_view.mm"
+      ],
+      "note": "Portion of the file. Upstream's number formatter, which had no stated licence, is not shipped: it was replaced by this project's own MIT implementation, see third_party/iPlug2/VENDORED.md, Patches."
+    },
+    {
+      "id": "vstgui",
+      "name": "VSTGUI generic text edit",
+      "licenses": [
+        "BSD-3-Clause"
+      ],
+      "copyright": "Steinberg Media Technologies",
+      "text": "third_party/licenses/VSTGUI.txt",
+      "files": [
+        "third_party/iPlug2/IGraphics/Controls/ITextEntryControl.*"
+      ],
+      "url": "https://github.com/steinbergmedia/vstgui",
+      "note": "The iPlug2 file is based on it."
+    },
+    {
+      "id": "keyboard",
+      "name": "IKeyboardControl / IVKeyboardControl",
+      "licenses": [
+        "Zlib"
+      ],
+      "copyright": "2009, 2010 Theo Niessink; 2018 Eugene Yakshin",
+      "text": "third_party/licenses/IVKeyboardControl.txt",
+      "files": [
+        "third_party/iPlug2/IGraphics/Controls/IVKeyboardControl.h"
+      ]
+    },
+    {
+      "id": "mlqueue",
+      "name": "madronalib MLQueue",
+      "licenses": [
+        "MIT"
+      ],
+      "copyright": "Madrona Labs LLC",
+      "text": "third_party/licenses/madronalib.txt",
+      "files": [
+        "third_party/iPlug2/IPlug/IPlugQueue.h"
+      ],
+      "url": "https://github.com/madronalabs/madronalib",
+      "note": "The iPlug2 file is based on it."
+    },
+    {
+      "id": "ahe",
+      "name": "AHEasing",
+      "licenses": [
+        "Unlicense"
+      ],
+      "copyright": "Warren Moore (public domain)",
+      "text": "third_party/licenses/AHEasing.txt",
+      "files": [
+        "third_party/iPlug2/IPlug/Extras/Easing.h"
+      ],
+      "url": "https://github.com/warrenm/AHEasing",
+      "note": "The iPlug2 file is based on it."
+    },
+    {
+      "id": "catch2",
+      "name": "Catch2 2.13.10",
+      "licenses": [
+        "BSL-1.0"
+      ],
+      "copyright": "Catch2 authors",
+      "text": "third_party/licenses/Catch2.txt",
+      "files": [
+        "third_party/catch2/*"
+      ],
+      "url": "https://github.com/catchorg/Catch2",
+      "note": "Tests only; never in a plug-in.",
+      "dev_only": true
+    }
+  ],
+  "wdl_files": {
+    "assocarray.h": "no notice; WDL licence",
+    "denormal.h": "no notice; WDL licence",
+    "dirscan.h": "own notice",
+    "heapbuf.h": "own notice",
+    "lice/lice.h": "own notice",
+    "mergesort.h": "no notice; WDL licence",
+    "mutex.h": "own notice",
+    "ptrlist.h": "own notice",
+    "queue.h": "own notice",
+    "swell/commctrl.h": "no notice; WDL licence",
+    "swell/shlobj.h": "no notice; WDL licence",
+    "swell/swell-appstub.mm": "own notice",
+    "swell/swell-dlg.mm": "own notice",
+    "swell/swell-dlggen.h": "own notice",
+    "swell/swell-functions.h": "own notice",
+    "swell/swell-gdi-internalpool.h": "own notice",
+    "swell/swell-gdi.mm": "own notice",
+    "swell/swell-ini.cpp": "own notice",
+    "swell/swell-internal.h": "own notice",
+    "swell/swell-kb.mm": "own notice",
+    "swell/swell-menu.mm": "own notice",
+    "swell/swell-menugen.h": "own notice",
+    "swell/swell-misc.mm": "own notice",
+    "swell/swell-miscdlg.mm": "own notice",
+    "swell/swell-types.h": "own notice",
+    "swell/swell-wnd.mm": "own notice",
+    "swell/swell.cpp": "own notice",
+    "swell/swell.h": "own notice",
+    "swell/swell_resgen.pl": "no notice; WDL licence",
+    "swell/swell_resgen.sh": "no notice; WDL licence",
+    "swell/swellappmain.h": "no notice; WDL licence",
+    "swell/swellappmain.mm": "own notice",
+    "swell/windows.h": "no notice; WDL licence",
+    "wdl_base64.h": "no notice; WDL licence",
+    "wdlatomic.h": "no notice; WDL licence",
+    "wdlcstring.h": "own notice",
+    "wdlendian.h": "own notice",
+    "wdlstring.h": "own notice",
+    "wdltypes.h": "no notice; WDL licence",
+    "wdlutf8.h": "own notice"
+  },
+  "marker_exceptions": [
+    {
+      "path": "third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/stb_truetype.h",
+      "line": "//         for non-commercial fonts, thus making fonts scaled in points",
+      "reason": "describes font metrics (\"non-commercial fonts\"); the file is public domain"
+    },
+    {
+      "path": "third_party/iPlug2/Dependencies/IGraphics/STB/stb_textedit.h",
+      "line": "commercial or non-commercial, and by any means.",
+      "reason": "Unlicense wording that grants commercial and non-commercial use"
+    }
+  ]
+}

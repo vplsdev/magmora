@@ -1,0 +1,30 @@
+# Every test_<name>.cpp (any depth) is its own executable, so packages do not share a test binary or a
+# global operator new. Any other .cpp here is shared test support.
+set(_catch "${PROJECT_SOURCE_DIR}/third_party/catch2")
+file(GLOB_RECURSE _all CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+set(_tests ${_all})
+list(FILTER _tests INCLUDE REGEX "/test_[^/]+\\.cpp$")
+set(_support ${_all})
+list(FILTER _support EXCLUDE REGEX "/(test_[^/]+|catch_main)\\.cpp$")
+
+add_library(magmora_test_support STATIC catch_main.cpp ${_support})
+target_include_directories(magmora_test_support SYSTEM PUBLIC "${_catch}")
+target_include_directories(magmora_test_support PUBLIC
+  "${CMAKE_CURRENT_SOURCE_DIR}" "${PROJECT_SOURCE_DIR}/dsp/src")
+target_compile_definitions(magmora_test_support PUBLIC MAGMORA_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+target_link_libraries(magmora_test_support PUBLIC magmora_dsp)
+magmora_warnings(magmora_test_support)
+
+add_custom_target(magmora_tests ALL)
+foreach(file IN LISTS _tests)
+  get_filename_component(exe "${file}" NAME_WE)
+  string(REGEX REPLACE "^test_" "" name "${exe}")
+  if(TARGET ${exe})
+    message(FATAL_ERROR "two tests are called ${exe}: ${file}")
+  endif()
+  add_executable(${exe} "${file}")
+  target_link_libraries(${exe} PRIVATE magmora_test_support)
+  magmora_warnings(${exe})
+  add_test(NAME ${name} COMMAND ${exe} WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
+  add_dependencies(magmora_tests ${exe})
+endforeach()

@@ -1,0 +1,961 @@
+{
+ "version": 1,
+ "order": [
+  "pedal",
+  "eq",
+  "cab"
+ ],
+ "units": "points on the 1280 x 620 canvas; x and y are centres",
+ "bar_h": 44,
+ "pages": {
+  "pedal": {
+   "title": "Pedal",
+   "background": "pedal_bg.jpg",
+   "assets": {
+    "pedal_bg": {
+     "file": "pedal_bg.jpg",
+     "w": 1280,
+     "h": 576
+    },
+    "pedal_knob": {
+     "file": "pedal_knob.png",
+     "w": 840,
+     "h": 840,
+     "cell": [
+      84,
+      84
+     ],
+     "columns": 10,
+     "frames": 97
+    },
+    "pedal_switch": {
+     "file": "pedal_switch.png",
+     "w": 128,
+     "h": 64,
+     "cell": [
+      64,
+      64
+     ],
+     "columns": 2,
+     "frames": 2
+    },
+    "pedal_glow": {
+     "file": "pedal_glow.png",
+     "w": 64,
+     "h": 64,
+     "cell": [
+      64,
+      64
+     ],
+     "columns": 1,
+     "frames": 1
+    }
+   },
+   "controls": [
+    {
+     "id": "pedal_drive",
+     "kind": "knob",
+     "x": 568.0,
+     "y": 194.0,
+     "asset": "pedal_knob",
+     "hit": [
+      78,
+      84
+     ],
+     "w": 84,
+     "h": 84,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "pedal_level",
+     "kind": "knob",
+     "x": 712.0,
+     "y": 194.0,
+     "asset": "pedal_knob",
+     "hit": [
+      78,
+      84
+     ],
+     "w": 84,
+     "h": 84,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "pedal_tone",
+     "kind": "knob",
+     "x": 640.0,
+     "y": 276.0,
+     "asset": "pedal_knob",
+     "hit": [
+      78,
+      84
+     ],
+     "w": 84,
+     "h": 84,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "pedal_on",
+     "kind": "switch",
+     "x": 640.0,
+     "y": 480.0,
+     "asset": "pedal_switch",
+     "hit": [
+      84,
+      84
+     ],
+     "w": 64,
+     "h": 64,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "pedal_led",
+     "kind": "lamp",
+     "x": 640.0,
+     "y": 162.0,
+     "asset": "pedal_glow",
+     "source": "pedal_on",
+     "on_value": 1,
+     "w": 64,
+     "h": 64,
+     "frames": 1,
+     "columns": 1
+    }
+   ]
+  },
+  "eq": {
+   "title": "EQ",
+   "background": "eq_bg.jpg",
+   "assets": {
+    "eq_bg": {
+     "file": "eq_bg.jpg",
+     "w": 1280,
+     "h": 576
+    },
+    "eq_knob": {
+     "file": "eq_knob.png",
+     "w": 680,
+     "h": 680,
+     "cell": [
+      68,
+      68
+     ],
+     "columns": 10,
+     "frames": 97
+    },
+    "eq_toggle": {
+     "file": "eq_toggle.png",
+     "w": 80,
+     "h": 64,
+     "cell": [
+      40,
+      64
+     ],
+     "columns": 2,
+     "frames": 2
+    },
+    "eq_toggle_h": {
+     "file": "eq_toggle_h.png",
+     "w": 128,
+     "h": 40,
+     "cell": [
+      64,
+      40
+     ],
+     "columns": 2,
+     "frames": 2
+    },
+    "eq_button": {
+     "file": "eq_button.png",
+     "w": 96,
+     "h": 48,
+     "cell": [
+      48,
+      48
+     ],
+     "columns": 2,
+     "frames": 2
+    },
+    "eq_glow": {
+     "file": "eq_glow.png",
+     "w": 48,
+     "h": 48,
+     "cell": [
+      48,
+      48
+     ],
+     "columns": 1,
+     "frames": 1
+    },
+    "eq_glass": {
+     "file": "eq_glass.jpg",
+     "w": 888,
+     "h": 166,
+     "window": "eq_screen"
+    }
+   },
+   "controls": [
+    {
+     "id": "eq_hp_freq",
+     "kind": "knob",
+     "x": 262.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "hp",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_lp_freq",
+     "kind": "knob",
+     "x": 1008.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "lp",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b1_freq",
+     "kind": "knob",
+     "x": 373.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b1",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b1_gain",
+     "kind": "knob",
+     "x": 447.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b1",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b1_q",
+     "kind": "knob",
+     "x": 373.0,
+     "y": 488.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b1",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b2_freq",
+     "kind": "knob",
+     "x": 523.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b2",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b2_gain",
+     "kind": "knob",
+     "x": 597.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b2",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b2_q",
+     "kind": "knob",
+     "x": 560.0,
+     "y": 488.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b2",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b3_freq",
+     "kind": "knob",
+     "x": 673.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b3",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b3_gain",
+     "kind": "knob",
+     "x": 747.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b3",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b3_q",
+     "kind": "knob",
+     "x": 710.0,
+     "y": 488.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b3",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b4_freq",
+     "kind": "knob",
+     "x": 823.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b4",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b4_gain",
+     "kind": "knob",
+     "x": 897.0,
+     "y": 384.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b4",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b4_q",
+     "kind": "knob",
+     "x": 823.0,
+     "y": 488.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "band": "b4",
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_hp_slope",
+     "kind": "selector",
+     "x": 262.0,
+     "y": 488.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "detents": [
+      29,
+      48,
+      67
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_lp_slope",
+     "kind": "selector",
+     "x": 1008.0,
+     "y": 488.0,
+     "asset": "eq_knob",
+     "hit": [
+      66,
+      72
+     ],
+     "detents": [
+      29,
+      48,
+      67
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "eq_b1_type",
+     "kind": "switch",
+     "x": 447.0,
+     "y": 488.0,
+     "asset": "eq_toggle",
+     "hit": [
+      40,
+      64
+     ],
+     "w": 40,
+     "h": 64,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "eq_b4_type",
+     "kind": "switch",
+     "x": 897.0,
+     "y": 488.0,
+     "asset": "eq_toggle",
+     "hit": [
+      40,
+      64
+     ],
+     "w": 40,
+     "h": 64,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "eq_position",
+     "kind": "switch",
+     "x": 136.0,
+     "y": 488.0,
+     "asset": "eq_toggle_h",
+     "hit": [
+      64,
+      40
+     ],
+     "w": 64,
+     "h": 40,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "eq_on",
+     "kind": "switch",
+     "x": 136.0,
+     "y": 384.0,
+     "asset": "eq_button",
+     "hit": [
+      50,
+      50
+     ],
+     "w": 48,
+     "h": 48,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "eq_led",
+     "kind": "lamp",
+     "x": 136.0,
+     "y": 350.0,
+     "asset": "eq_glow",
+     "source": "eq_on",
+     "on_value": 1,
+     "w": 48,
+     "h": 48,
+     "frames": 1,
+     "columns": 1
+    },
+    {
+     "id": "eq_screen",
+     "kind": "window",
+     "x": 640.0,
+     "y": 231.0,
+     "w": 888.0,
+     "h": 166.0,
+     "colours": {
+      "hp": [
+       0.78,
+       0.74,
+       0.66
+      ],
+      "b1": [
+       0.88,
+       0.36,
+       0.16
+      ],
+      "b2": [
+       0.9,
+       0.68,
+       0.22
+      ],
+      "b3": [
+       0.22,
+       0.7,
+       0.62
+      ],
+      "b4": [
+       0.42,
+       0.55,
+       0.92
+      ],
+      "lp": [
+       0.78,
+       0.74,
+       0.66
+      ]
+     }
+    }
+   ]
+  },
+  "cab": {
+   "title": "Cab",
+   "background": "cab_bg.jpg",
+   "assets": {
+    "cab_bg": {
+     "file": "cab_bg.jpg",
+     "w": 1280,
+     "h": 576
+    },
+    "cab_knob": {
+     "file": "cab_knob.png",
+     "w": 680,
+     "h": 680,
+     "cell": [
+      68,
+      68
+     ],
+     "columns": 10,
+     "frames": 97
+    },
+    "cab_knob_small": {
+     "file": "cab_knob_small.png",
+     "w": 440,
+     "h": 440,
+     "cell": [
+      44,
+      44
+     ],
+     "columns": 10,
+     "frames": 97
+    },
+    "cab_button": {
+     "file": "cab_button.png",
+     "w": 72,
+     "h": 36,
+     "cell": [
+      36,
+      36
+     ],
+     "columns": 2,
+     "frames": 2
+    },
+    "cab_glow": {
+     "file": "cab_glow.png",
+     "w": 24,
+     "h": 24,
+     "cell": [
+      24,
+      24
+     ],
+     "columns": 1,
+     "frames": 1
+    }
+   },
+   "controls": [
+    {
+     "id": "mic1_position",
+     "kind": "knob",
+     "x": 212.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic1_distance",
+     "kind": "knob",
+     "x": 294.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic1_level",
+     "kind": "knob",
+     "x": 376.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic1_pan",
+     "kind": "knob",
+     "x": 458.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic2_position",
+     "kind": "knob",
+     "x": 922.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic2_distance",
+     "kind": "knob",
+     "x": 1004.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic2_level",
+     "kind": "knob",
+     "x": 1086.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic2_pan",
+     "kind": "knob",
+     "x": 1168.0,
+     "y": 566.0,
+     "asset": "cab_knob",
+     "hit": [
+      60,
+      64
+     ],
+     "w": 68,
+     "h": 68,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic_offset",
+     "kind": "knob",
+     "x": 693.0,
+     "y": 566.0,
+     "asset": "cab_knob_small",
+     "hit": [
+      46,
+      46
+     ],
+     "w": 44,
+     "h": 44,
+     "frames": 97,
+     "columns": 10
+    },
+    {
+     "id": "mic1_on",
+     "kind": "switch",
+     "x": 38.0,
+     "y": 566.0,
+     "asset": "cab_button",
+     "hit": [
+      34,
+      34
+     ],
+     "w": 36,
+     "h": 36,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "mic1_on_led",
+     "kind": "lamp",
+     "x": 50.0,
+     "y": 553.0,
+     "asset": "cab_glow",
+     "source": "mic1_on",
+     "on_value": 1,
+     "w": 24,
+     "h": 24,
+     "frames": 1,
+     "columns": 1
+    },
+    {
+     "id": "mic1_polarity",
+     "kind": "switch",
+     "x": 518.0,
+     "y": 566.0,
+     "asset": "cab_button",
+     "hit": [
+      34,
+      34
+     ],
+     "w": 36,
+     "h": 36,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "mic1_polarity_led",
+     "kind": "lamp",
+     "x": 530.0,
+     "y": 553.0,
+     "asset": "cab_glow",
+     "source": "mic1_polarity",
+     "on_value": 1,
+     "w": 24,
+     "h": 24,
+     "frames": 1,
+     "columns": 1
+    },
+    {
+     "id": "mic2_on",
+     "kind": "switch",
+     "x": 748.0,
+     "y": 566.0,
+     "asset": "cab_button",
+     "hit": [
+      34,
+      34
+     ],
+     "w": 36,
+     "h": 36,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "mic2_on_led",
+     "kind": "lamp",
+     "x": 760.0,
+     "y": 553.0,
+     "asset": "cab_glow",
+     "source": "mic2_on",
+     "on_value": 1,
+     "w": 24,
+     "h": 24,
+     "frames": 1,
+     "columns": 1
+    },
+    {
+     "id": "mic2_polarity",
+     "kind": "switch",
+     "x": 1228.0,
+     "y": 566.0,
+     "asset": "cab_button",
+     "hit": [
+      34,
+      34
+     ],
+     "w": 36,
+     "h": 36,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "mic2_polarity_led",
+     "kind": "lamp",
+     "x": 1240.0,
+     "y": 553.0,
+     "asset": "cab_glow",
+     "source": "mic2_polarity",
+     "on_value": 1,
+     "w": 24,
+     "h": 24,
+     "frames": 1,
+     "columns": 1
+    },
+    {
+     "id": "cab_pack",
+     "kind": "action",
+     "x": 593.0,
+     "y": 566.0,
+     "asset": "cab_button",
+     "hit": [
+      34,
+      34
+     ],
+     "w": 36,
+     "h": 36,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "mic_align",
+     "kind": "switch",
+     "x": 643.0,
+     "y": 566.0,
+     "asset": "cab_button",
+     "hit": [
+      34,
+      34
+     ],
+     "w": 36,
+     "h": 36,
+     "frames": 2,
+     "columns": 2
+    },
+    {
+     "id": "mic_align_led",
+     "kind": "lamp",
+     "x": 655.0,
+     "y": 553.0,
+     "asset": "cab_glow",
+     "source": "mic_align",
+     "on_value": 1,
+     "w": 24,
+     "h": 24,
+     "frames": 1,
+     "columns": 1
+    },
+    {
+     "id": "slot1_window",
+     "kind": "window",
+     "x": 122.0,
+     "y": 566.0,
+     "w": 116.0,
+     "h": 30.0
+    },
+    {
+     "id": "slot2_window",
+     "kind": "window",
+     "x": 832.0,
+     "y": 566.0,
+     "w": 116.0,
+     "h": 30.0
+    },
+    {
+     "id": "cone1",
+     "kind": "window",
+     "x": 424.65,
+     "y": 298.0,
+     "w": 320.96,
+     "h": 320.96
+    },
+    {
+     "id": "cone2",
+     "kind": "window",
+     "x": 855.35,
+     "y": 298.0,
+     "w": 320.96,
+     "h": 320.96
+    }
+   ]
+  }
+ }
+}

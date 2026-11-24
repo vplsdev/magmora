@@ -1,0 +1,19 @@
+{
+  "name": "Dry Seam",
+  "category": "Rhythm",
+  "params": {
+    "channel": 0,
+    "bright": 1,
+    "crunch": 1,
+    "input_jack": 0,
+    "pre_rhythm": 6.5,
+    "post_rhythm": 4.2,
+    "low": 4.0,
+    "mid": 5.0,
+    "high": 6.2,
+    "resonance": 4.0,
+    "presence": 6.0,
+    "output_level": -0.9,
+    "gate_threshold": -66
+  }
+}

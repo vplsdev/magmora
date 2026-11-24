@@ -1,0 +1,10 @@
+# Every .cpp directly in this directory is one tool. Shared helpers go in headers or a sub-directory.
+file(GLOB _tools CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+foreach(file IN LISTS _tools)
+  get_filename_component(tool "${file}" NAME_WE)
+  add_executable(${tool} "${file}")
+  target_include_directories(${tool} PRIVATE "${PROJECT_SOURCE_DIR}/dsp/src" "${CMAKE_CURRENT_SOURCE_DIR}")
+  target_link_libraries(${tool} PRIVATE magmora_dsp)
+  magmora_warnings(${tool})
+  set_property(GLOBAL APPEND PROPERTY MAGMORA_TOOLS ${tool})
+endforeach()

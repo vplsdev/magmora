@@ -1,0 +1,19 @@
+{
+  "name": "Cinder Cone",
+  "category": "Rhythm",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 6.0,
+    "post_lead": 3.2,
+    "low": 4.5,
+    "mid": 5.0,
+    "high": 5.5,
+    "resonance": 5.0,
+    "presence": 7.0,
+    "output_level": 3.4,
+    "gate_threshold": -60
+  }
+}

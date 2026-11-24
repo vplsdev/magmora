@@ -1,0 +1,543 @@
+{
+ "fs": 192000,
+ "probes": [
+  "p1a",
+  "g1b",
+  "p1b",
+  "p2a",
+  "p2b",
+  "p5b",
+  "nX",
+  "nTW",
+  "k3b",
+  "p3a",
+  "ga",
+  "pa",
+  "spk",
+  "b",
+  "sc",
+  "v3",
+  "v2"
+ ],
+ "settings": {
+  "lead_default": {
+   "channel": "lead"
+  },
+  "lead_hot": {
+   "channel": "lead",
+   "pre_lead": 8,
+   "post_lead": 7,
+   "low": 7,
+   "mid": 3,
+   "high": 6,
+   "presence": 7,
+   "resonance": 7
+  },
+  "lead_low": {
+   "channel": "lead",
+   "pre_lead": 2,
+   "post_lead": 3
+  },
+  "rhythm_clean": {
+   "channel": "rhythm",
+   "pre_rhythm": 4,
+   "post_rhythm": 6
+  },
+  "rhythm_bright": {
+   "channel": "rhythm",
+   "bright": true,
+   "pre_rhythm": 4,
+   "post_rhythm": 6
+  },
+  "crunch": {
+   "channel": "rhythm",
+   "crunch": true,
+   "pre_rhythm": 7,
+   "post_rhythm": 5
+  },
+  "crunch_bright": {
+   "channel": "rhythm",
+   "crunch": true,
+   "bright": true,
+   "pre_rhythm": 7,
+   "post_rhythm": 5
+  },
+  "normal_input": {
+   "channel": "lead",
+   "input": "normal"
+  },
+  "lead_low_0": {
+   "channel": "lead",
+   "low": 0
+  },
+  "lead_low_10": {
+   "channel": "lead",
+   "low": 10
+  },
+  "lead_mid_0": {
+   "channel": "lead",
+   "mid": 0
+  },
+  "lead_mid_10": {
+   "channel": "lead",
+   "mid": 10
+  },
+  "lead_high_0": {
+   "channel": "lead",
+   "high": 0
+  },
+  "lead_high_10": {
+   "channel": "lead",
+   "high": 10
+  },
+  "lead_presence_0": {
+   "channel": "lead",
+   "presence": 0
+  },
+  "lead_presence_10": {
+   "channel": "lead",
+   "presence": 10
+  },
+  "lead_resonance_0": {
+   "channel": "lead",
+   "resonance": 0
+  },
+  "lead_resonance_10": {
+   "channel": "lead",
+   "resonance": 10
+  },
+  "lead_pre_lead_0": {
+   "channel": "lead",
+   "pre_lead": 0
+  },
+  "lead_pre_lead_10": {
+   "channel": "lead",
+   "pre_lead": 10
+  },
+  "lead_post_lead_0": {
+   "channel": "lead",
+   "post_lead": 0
+  },
+  "lead_post_lead_10": {
+   "channel": "lead",
+   "post_lead": 10
+  }
+ },
+ "tran": {
+  "sine_lead_110Hz_0.0001V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 110,
+     "amp": 0.0001,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_110Hz_0.001V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 110,
+     "amp": 0.001,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_110Hz_0.01V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 110,
+     "amp": 0.01,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_110Hz_0.1V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 110,
+     "amp": 0.1,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_110Hz_0.5V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 110,
+     "amp": 0.5,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_440Hz_0.0001V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.0001,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_440Hz_0.001V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.001,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_440Hz_0.01V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.01,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_440Hz_0.1V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.1,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_440Hz_0.5V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.5,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_2000Hz_0.0001V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 2000,
+     "amp": 0.0001,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_2000Hz_0.001V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 2000,
+     "amp": 0.001,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_2000Hz_0.01V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 2000,
+     "amp": 0.01,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_2000Hz_0.1V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 2000,
+     "amp": 0.1,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_2000Hz_0.5V": {
+   "setting": "lead_default",
+   "sig": [
+    "sine",
+    {
+     "f0": 2000,
+     "amp": 0.5,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_rhythm_clean_440Hz_0.01V": {
+   "setting": "rhythm_clean",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.01,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_rhythm_clean_440Hz_0.1V": {
+   "setting": "rhythm_clean",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.1,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_rhythm_clean_440Hz_0.5V": {
+   "setting": "rhythm_clean",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.5,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_crunch_440Hz_0.01V": {
+   "setting": "crunch",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.01,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_crunch_440Hz_0.1V": {
+   "setting": "crunch",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.1,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_crunch_440Hz_0.5V": {
+   "setting": "crunch",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.5,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_crunch_bright_440Hz_0.01V": {
+   "setting": "crunch_bright",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.01,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_crunch_bright_440Hz_0.1V": {
+   "setting": "crunch_bright",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.1,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_crunch_bright_440Hz_0.5V": {
+   "setting": "crunch_bright",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.5,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_hot_440Hz_0.01V": {
+   "setting": "lead_hot",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.01,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_hot_440Hz_0.1V": {
+   "setting": "lead_hot",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.1,
+     "dur": 0.06
+    }
+   ]
+  },
+  "sine_lead_hot_440Hz_0.5V": {
+   "setting": "lead_hot",
+   "sig": [
+    "sine",
+    {
+     "f0": 440,
+     "amp": 0.5,
+     "dur": 0.06
+    }
+   ]
+  },
+  "burst_lead": {
+   "setting": "lead_default",
+   "sig": [
+    "burst",
+    {}
+   ]
+  },
+  "burst_crunch": {
+   "setting": "crunch",
+   "sig": [
+    "burst",
+    {}
+   ]
+  },
+  "burst_lead_hot": {
+   "setting": "lead_hot",
+   "sig": [
+    "burst",
+    {}
+   ]
+  },
+  "chord_lead_hot": {
+   "setting": "lead_hot",
+   "sig": [
+    "chord",
+    {}
+   ]
+  },
+  "chug_lead": {
+   "setting": "lead_default",
+   "sig": [
+    "chug",
+    {}
+   ]
+  },
+  "chug_lead_hot": {
+   "setting": "lead_hot",
+   "sig": [
+    "chug",
+    {}
+   ]
+  }
+ },
+ "stage": {
+  "A_0": {
+   "cluster": "A",
+   "amp": 0.001
+  },
+  "A_1": {
+   "cluster": "A",
+   "amp": 0.03
+  },
+  "A_2": {
+   "cluster": "A",
+   "amp": 0.5
+  },
+  "B_0": {
+   "cluster": "B",
+   "amp": 0.5
+  },
+  "B_1": {
+   "cluster": "B",
+   "amp": 10.0
+  },
+  "B_2": {
+   "cluster": "B",
+   "amp": 60.0
+  },
+  "C_0": {
+   "cluster": "C",
+   "amp": 5.0
+  },
+  "C_1": {
+   "cluster": "C",
+   "amp": 50.0
+  },
+  "C_2": {
+   "cluster": "C",
+   "amp": 110.0
+  },
+  "D_0": {
+   "cluster": "D",
+   "amp": 5.0
+  },
+  "D_1": {
+   "cluster": "D",
+   "amp": 50.0
+  },
+  "D_2": {
+   "cluster": "D",
+   "amp": 110.0
+  },
+  "T_0": {
+   "cluster": "T",
+   "amp": 5.0
+  },
+  "T_1": {
+   "cluster": "T",
+   "amp": 50.0
+  },
+  "T_2": {
+   "cluster": "T",
+   "amp": 90.0
+  },
+  "P_0": {
+   "cluster": "P",
+   "amp": 0.5
+  },
+  "P_1": {
+   "cluster": "P",
+   "amp": 5.0
+  },
+  "P_2": {
+   "cluster": "P",
+   "amp": 40.0
+  }
+ },
+ "model_hash": "2df6d3425ed981c7",
+ "value_set": "prototype"
+}

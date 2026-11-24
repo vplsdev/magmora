@@ -1,0 +1,44 @@
+// Build through plugin/scripts/build_mac.sh: it passes the product name and bundle prefix (both from config.h),
+// the DSP library and the build root on the command line. Nothing is ever written outside the build root.
+
+IPLUG2_ROOT = $(PROJECT_DIR)/../../third_party/iPlug2
+
+#include "../../third_party/iPlug2/common-mac.xcconfig"
+
+//------------------------------ build locations: never install, whatever common-mac.xcconfig says
+MAGMORA_BUILD_ROOT = $(PROJECT_DIR)/../../build/plugin
+SYMROOT = $(MAGMORA_BUILD_ROOT)/products
+OBJROOT = $(MAGMORA_BUILD_ROOT)/obj
+SHARED_PRECOMPS_DIR = $(OBJROOT)/PCH
+DEPLOYMENT_LOCATION = NO
+DSTROOT = $(MAGMORA_BUILD_ROOT)/unused-dstroot
+APP_PATH = $(DSTROOT)
+AU_PATH = $(DSTROOT)
+VST2_PATH = $(DSTROOT)
+VST3_PATH = $(DSTROOT)
+AAX_PATH = $(DSTROOT)
+COMPILER_INDEX_STORE_ENABLE = NO
+
+//------------------------------ platform
+MACOSX_DEPLOYMENT_TARGET = 11.0
+ARCHS = arm64
+ONLY_ACTIVE_ARCH = NO
+
+//------------------------------ ad-hoc signing only, never a personal identity
+CERTIFICATE_ID =
+DEVELOPMENT_TEAM =
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = -
+
+//------------------------------ include paths: only what is vendored
+IPLUG_INC_PATHS = $(PROJECT_ROOT) $(WDL_PATH) $(SWELL_PATH) $(IPLUG_PATH) $(EXTRAS_PATH) $(RTAUDIO_PATH) $(RTMIDI_PATH)
+EXTRA_INC_PATHS = $(PROJECT_ROOT)/../dsp/include $(IGRAPHICS_PATH) $(IGRAPHICS_PATH)/Controls $(IGRAPHICS_PATH)/Platforms $(IGRAPHICS_PATH)/Drawing $(NSVG_PATH) $(NVG_PATH) $(NVGMTL_PATH) $(STB_PATH)
+EXTRA_LNK_FLAGS = -framework Metal -framework MetalKit -framework OpenGL "$(MAGMORA_DSP_LIB)"
+
+//------------------------------ defines
+EXTRA_ALL_DEFS = OBJC_PREFIX=vMagmora SWELL_APP_PREFIX=Swell_vMagmora IGRAPHICS_NANOVG IGRAPHICS_METAL
+
+RELEASE_OPTIMIZE = 3
+DEBUG_OPTIMIZE = 0
+PROFILE = NO
+GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO

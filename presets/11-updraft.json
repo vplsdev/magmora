@@ -1,0 +1,19 @@
+{
+  "name": "Updraft",
+  "category": "Lead",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 5.6,
+    "post_lead": 4.6,
+    "low": 3.6,
+    "mid": 7.6,
+    "high": 6.6,
+    "resonance": 3.4,
+    "presence": 6.4,
+    "output_level": -4.2,
+    "gate_threshold": -72
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Cinder Push",
+  "category": "Full chain",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "low": 5.0,
+    "mid": 4.5,
+    "high": 6.0,
+    "post_lead": 4.0,
+    "resonance": 5.0,
+    "presence": 6.0,
+    "output_level": -0.3,
+    "pre_lead": 4.2,
+    "gate_threshold": -68.0
+  },
+  "pedal": {
+    "pedal_on": 1,
+    "pedal_drive": 1.5,
+    "pedal_tone": 6.0,
+    "pedal_level": 8.0
+  },
+  "eq": {
+    "eq_on": 1,
+    "eq_hp_freq": 80.0,
+    "eq_hp_slope": 1,
+    "eq_lp_freq": 10000.0,
+    "eq_lp_slope": 1
+  },
+  "cab": {
+    "cab_on": 1
+  }
+}

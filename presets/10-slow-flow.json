@@ -1,0 +1,18 @@
+{
+  "name": "Slow Flow",
+  "category": "Lead",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 7.4,
+    "post_lead": 4.4,
+    "low": 4.0,
+    "mid": 6.0,
+    "high": 4.0,
+    "resonance": 5.2,
+    "presence": 3.6,
+    "output_level": -1.4
+  }
+}

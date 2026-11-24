@@ -1,0 +1,43 @@
+# onsemi data sheet 1N914-D (1N91x, 1N4x48, FDLL914, FDLL4x48), page 3, 'Typical performance characteristics',
+# figure 3 (VF, 1 to 100 uA) and figure 4 (VF, 0.1 to 10 mA), Ta = 25 C. Digitised by us from the vector curves of the PDF
+# (opened 23 Nov 2026): figure 3 is a single straight segment, sampled here at the grid currents; figure 4 at its own vertices.
+# Reading uncertainty about 1 mV. The two figures meet at 100 uA within 2.3 mV.
+i_A,v_V,figure
+1e-06,0.2731,fig3
+2e-06,0.3076,fig3
+3e-06,0.3277,fig3
+5e-06,0.3531,fig3
+1e-05,0.3876,fig3
+2e-05,0.4220,fig3
+3e-05,0.4422,fig3
+5e-05,0.4676,fig3
+0.0001,0.5021,fig3
+0.0001,0.4998,fig4
+0.000233635,0.5430,fig4
+0.000253645,0.5473,fig4
+0.000277216,0.5517,fig4
+0.000304001,0.5565,fig4
+0.0003345,0.5614,fig4
+0.000370528,0.5665,fig4
+0.000409756,0.5718,fig4
+0.000456178,0.5771,fig4
+0.000507018,0.5827,fig4
+0.000567304,0.5883,fig4
+0.000633707,0.5940,fig4
+0.000794704,0.6056,fig4
+0.00100166,0.6174,fig4
+0.00112265,0.6231,fig4
+0.00125826,0.6292,fig4
+0.00158063,0.6406,fig4
+0.00176857,0.6464,fig4
+0.00197226,0.6519,fig4
+0.0021957,0.6575,fig4
+0.0024404,0.6628,fig4
+0.00270781,0.6681,fig4
+0.00298945,0.6733,fig4
+0.00328927,0.6781,fig4
+0.00360708,0.6830,fig4
+0.0039424,0.6875,fig4
+0.00428728,0.6916,fig4
+0.00464663,0.6958,fig4
+0.0099997,0.7350,fig4

@@ -1,0 +1,19 @@
+{
+  "name": "Lava Tube",
+  "category": "Lead",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 6.5,
+    "post_lead": 4.0,
+    "low": 4.8,
+    "mid": 6.8,
+    "high": 5.2,
+    "resonance": 4.6,
+    "presence": 5.0,
+    "output_level": -0.5,
+    "gate_threshold": -70
+  }
+}

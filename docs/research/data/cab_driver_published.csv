@@ -1,0 +1,22 @@
+# Published scalar data used by the cabinet model, each read by us on 23 Nov 2026. "est" rows are our estimates and
+# are marked as such wherever they are used (docs/research/CABINET.md).
+quantity,value,unit,source
+driver nominal diameter,305,mm,[N6] reference driver product sheet
+driver cut-out diameter,283,mm,[N6] reference driver product sheet
+driver voice-coil diameter,44,mm,[N6] reference driver product sheet
+driver resonance Fs (free air),75,Hz,[N6] reference driver product sheet
+driver Re (8 ohm / 16 ohm),7.3 / 12.9,ohm,[N6] reference driver product sheet
+driver sensitivity,100,dB,[N6] reference driver product sheet
+driver chassis depth incl. gasket,97,mm,[N6] reference driver product sheet
+driver magnet depth,38,mm,[N6] reference driver product sheet
+driver overall depth,135,mm,[N6] reference driver product sheet
+cabinet outer height x width x depth,835 x 765 x 362,mm,maker's and retailers' listings (32.875 x 30.125 x 14.25 in); search summary only - not opened
+57-type microphone body width,32,mm,[N8] 57-type specification sheet
+421-type microphone body,215 x 46 x 49,mm,[N9] 421-type product specification v1.1
+driver moving mass Mms,30,g,est (no manufacturer value exists; third-party figures for similar 12-inch guitar drivers 33 to 39 g - search summaries only)
+driver effective piston radius,130,mm,est (from the cut-out diameter less the surround)
+cone depth coil junction to rim,60,mm,est (from chassis depth less magnet-gap parts)
+dust-cap radius,45,mm,est
+cabinet wall thickness,18,mm,est
+57-type diaphragm diameter,22,mm,est (must fit a 32 mm body)
+421-type diaphragm diameter,32,mm,est (must fit a 46 mm body)

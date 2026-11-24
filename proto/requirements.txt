@@ -1,0 +1,9 @@
+# Developer tools for the prototype and the evaluation harness. None of this is shipped or linked.
+numpy
+scipy
+numba
+soundfile
+matplotlib
+cma            # BSD-3; capture fitting
+pymupdf        # only for reading reference PDFs during research
+# Nothing in this repository imports a GPL package.

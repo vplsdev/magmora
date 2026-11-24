@@ -1,0 +1,141 @@
+# local and private
+docs/BRIEF.local.md
+.tools/
+scripts/env.local.sh
+eval/local_assets.json
+*.local.sh
+*.local.json
+*.local.md
+!eval/local_assets.example.json
+
+# environment files and credentials
+.env
+.env.*
+.envrc
+*.env
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.mobileprovision
+
+# builds, caches, editors
+build/
+/build-*/
+build-mac/
+build-win/
+cmake-build-*/
+DerivedData/
+CMakeUserPresets.json
+compile_commands.json
+*.generated.xcconfig
+xcuserdata/
+*.xcuserstate
+.vs/
+*.user
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+._*
+art/build/
+*.blend
+*.blend[0-9]
+
+# never commit captures (case-insensitive patterns, because CI and Linux checkouts are case-sensitive)
+*.[nN][aA][mM]
+*.[aA][iI][dD][aA][xX]
+*.[tT][sS][rR]
+*.[kK][iI][pP][rR]
+*.[pP][tT]
+*.[cC][kK][pP][tT]
+
+# never commit audio: DI tracks, renders, impulse responses
+*.[wW][aA][vV]
+*.[wW]64
+*.[rR][fF]64
+*.[aA][iI][fF]
+*.[aA][iI][fF][fF]
+*.[fF][lL][aA][cC]
+*.[mM][pP]3
+*.[mM]4[aA]
+*.[aA][aA][cC]
+*.[oO][gG][gG]
+*.[oO][pP][uU][sS]
+*.[cC][aA][fF]
+*.[iI][rR][sS]
+# raw float audio: only the synthetic SPICE reference data
+*.f32
+*.f64
+*.npy
+*.npz
+!reference/**/*.f32
+!reference/**/*.f64
+
+# never commit schematics, manuals, scans or reference photos: images only where our own art lives
+*.[pP][dD][fF]
+*.[dD][jJ][vV][uU]
+*.[tT][iI][fF]
+*.[tT][iI][fF][fF]
+*.[bB][mM][pP]
+*.[gG][iI][fF]
+*.[wW][eE][bB][pP]
+*.[hH][eE][iI][cC]
+*.[eE][xX][rR]
+*.[pP][nN][gG]
+*.[jJ][pP][gG]
+*.[jJ][pP][eE][gG]
+!plugin/resources/img/**/*.png
+!plugin/resources/img/**/*.jpg
+!art/textures/**/*.png
+!art/textures/**/*.jpg
+!docs/images/**/*.png
+!docs/images/**/*.jpg
+*[sS][cC][hH][eE][mM][aA][tT][iI][cC]*.[sS][vV][gG]
+
+# ---------------------------------------------------------------------------------------------------------------
+# internal (not published): working notes, planning logs and tooling that only runs against private data.
+# These files stay in the working tree for the maintainers; they are not part of the public repository.
+# ---------------------------------------------------------------------------------------------------------------
+# planning, amendment and decision logs, porting notes, research-round notes
+/docs/AMENDMENTS.md
+/docs/PLAN.md
+/docs/PLAN_EXPANSION.md
+/docs/DECISIONS.md
+/docs/MODEL_CHANGES.md
+/docs/research/EXPANSION.md
+# the cabinet model's round-by-round ledger (public summary: docs/research/CABINET.md)
+/docs/research/CAB.md
+# comparisons with commercial products and fits against private captures
+/eval/STANDINGS.md
+/eval/standings.py
+/eval/fair_fit.py
+/eval/fit_capture.py
+/eval/run_fits.sh
+/eval/report.py
+/eval/feel.py
+/eval/nam_render.py
+/eval/chain_id.py
+/eval/probe_chain.py
+/eval/probe_gain.py
+/eval/lead_network_hypotheses.py
+# pedal scoring against private recordings and captures
+/eval/pedal_capture/
+# cabinet harness: loaders, scoring, yardsticks and diagnostics against the private reference recordings
+/eval/cab/*
+!/eval/cab/metrics.py
+!/eval/cab/test_virtualmic.py
+# cabinet model: round-by-round tuners, renderers and superseded rounds (the shipped model is model8.py and its bases)
+/proto/cab/_legacy.py
+/proto/cab/legacy/
+/proto/cab/prefit.py
+/proto/cab/render*.py
+/proto/cab/tune*.py
+/proto/cab/model6.py
+/proto/cab/model9.py
+/proto/cab/model10.py
+# the pitch transposer's prototype: its harness and the comparison code it vendors; the shipped transposer is
+# dsp/src/transpose and needs none of it
+/proto/transpose/

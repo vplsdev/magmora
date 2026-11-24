@@ -1,0 +1,18 @@
+{
+  "name": "Cold Ash",
+  "category": "Clean",
+  "params": {
+    "channel": 0,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_rhythm": 2.2,
+    "post_rhythm": 7.5,
+    "low": 4.5,
+    "mid": 5.5,
+    "high": 5.5,
+    "resonance": 4.0,
+    "presence": 5.0,
+    "output_level": 9.3
+  }
+}

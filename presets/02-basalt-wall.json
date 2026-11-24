@@ -1,0 +1,19 @@
+{
+  "name": "Basalt Wall",
+  "category": "Rhythm",
+  "params": {
+    "channel": 1,
+    "bright": 0,
+    "crunch": 0,
+    "input_jack": 0,
+    "pre_lead": 4.2,
+    "post_lead": 3.6,
+    "low": 5.5,
+    "mid": 4.0,
+    "high": 6.0,
+    "resonance": 5.5,
+    "presence": 6.0,
+    "output_level": 1.7,
+    "gate_threshold": -70
+  }
+}

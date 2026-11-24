@@ -1,0 +1,7 @@
+{
+  "about": "Value sets compiled into the engine (docs/MODEL.md section 2). Each is a set of overrides on proto/blockamp/amp.py PHYS; the first is the default and must stay empty, so that the default is always the prototype. as-drawn: the lead-channel coupling of the 1992 drawing, values as listed in docs/research/CIRCUIT.md section 4.",
+  "sets": [
+    {"name": "prototype", "phys": {}},
+    {"name": "as-drawn", "phys": {"c17": 2.2e-9, "r29": 470000.0, "c2": 22e-9}}
+  ]
+}
