@@ -199,6 +199,38 @@ class Audit:
 
     # ---- 1. what was compiled, linked and bundled
 
+    def msvc_build(self, tlogs, checkout):
+        """The Windows VST3 (msbuild): MSVC's file-tracking logs (CL.read.*.tlog, link.read.*.tlog, UTF-16, one
+        upper-cased path per line) list every source and header the compiler and linker read. checkout is the
+        repository's path on the Windows machine; files under its build folder and outside it (Visual Studio, the
+        Windows SDK) are not audited, as the system roots are not on the Mac."""
+        by_upper = {}
+        for rel in self.tree:
+            by_upper[rel.replace("/", "\\").upper()] = ROOT / rel
+        root = checkout.rstrip("\\").upper() + "\\"
+        found = 0
+        for tlog in tlogs:
+            if not tlog.is_file():
+                self.fail("evidence", tlog, "no MSVC tracking log")
+                continue
+            raw = tlog.read_bytes()
+            text = raw.decode("utf-16") if raw[:2] in (b"\xff\xfe", b"\xfe\xff") else raw.decode("utf-8", "replace")
+            for line in text.splitlines():
+                line = line.strip().upper()
+                if not line or line.startswith("^") or not line.startswith(root):
+                    continue
+                inside = line[len(root):]
+                if inside.startswith("BUILD\\"):
+                    continue
+                path = by_upper.get(inside)
+                if path is None:
+                    self.fail("location", inside, "read by MSVC but not a file git would publish")
+                    continue
+                self.uses[path.resolve()].add("plugin")
+                found += 1
+        if tlogs and not found:
+            self.fail("evidence", tlogs[0], f"no file under {checkout} in the MSVC logs")
+
     def cmake_build(self, build, role):
         db, cache = build / "compile_commands.json", build / "CMakeCache.txt"
         if not db.is_file() or not cache.is_file():
@@ -535,6 +567,9 @@ def main():
     ap.add_argument("--plugin-build", type=pathlib.Path)
     ap.add_argument("--no-plugin", action="store_true", help="DSP, tests and tools only (not a G7 pass)")
     ap.add_argument("--notices", type=pathlib.Path, help="write THIRD_PARTY_NOTICES.md here")
+    ap.add_argument("--msvc-tlog", type=pathlib.Path, action="append", default=[],
+                    help="a Windows VST3 build's CL.read/link.read tlog, copied from the build machine")
+    ap.add_argument("--msvc-checkout", default="C:\\work\\magmora", help="the repository's path in those logs")
     args = ap.parse_args()
     if args.notices and args.no_plugin:
         ap.error("--notices needs the plug-in build")
@@ -548,6 +583,8 @@ def main():
         audit.cmake_build(build, "dev")
     if plugin_dir:
         audit.xcode_build(plugin_dir, product["BUNDLE_NAME"])
+    if args.msvc_tlog:
+        audit.msvc_build(args.msvc_tlog, args.msvc_checkout)
     if not audit.uses:
         for _, where, why in audit.errors:
             print(f"license audit: {where}: {why}", file=sys.stderr)

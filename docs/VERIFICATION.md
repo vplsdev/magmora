@@ -438,3 +438,20 @@ Tight 234 / 255 / 513 samples, Standard 472 / 512 / 1024 (44.1 / 48 / 96 kHz). D
   Logs: `$BLOCKAMP_PRIVATE/work/release-check/logs/soak-*.log`.
 - Installed: the AU, VST3 and app under the former name removed; Magmora AU, VST3 and app installed;
   `auval -v aufx MgAp Mgmr` on the installed AU: AU VALIDATION SUCCEEDED.
+
+## Windows VST3 beta, 0.1.2 (25 Nov 2026)
+
+On the Windows Server 2025 virtual machine (Visual Studio 2022 Build Tools, MSVC 14.44, x64), from the 0.1.2 source:
+
+- DSP, tests and tools: all 26 test suites pass (`ctest -C Release`); the VST3 builds with 0 warnings and 0 errors.
+- pluginval 1.0.4 (Tracktion's Windows release, the same download checked from two machines), strictness 10, run in
+  the interactive desktop session (session 0, where SSH runs, has no desktop for its own window): **SUCCESS**,
+  including Editor, Open editor whilst processing and Editor Automation.
+- The machine has no graphics card: Windows' own OpenGL is 1.1. Before the fix, opening the editor crashed the host
+  in `glnvg__createShader` (a call through a null OpenGL 2.0 function pointer; iPlug2 does not check what glad
+  loaded). The editor now checks for OpenGL 2.0 first and offers no editor without it, so pluginval's editor tests
+  ran that path. **The NanoVG editor itself has not been drawn on Windows**: that needs a machine with OpenGL 2.0.
+- Licences: `scripts/license_audit.py --msvc-tlog CL.read.1.tlog --msvc-tlog link.read.1.tlog` (MSVC's tracking
+  logs of the VST3 build, copied from the machine) adds the Windows-only files to the audit (403 files, OK); the
+  notices now include glad and khrplatform.h.
+- Not played in a Windows DAW.

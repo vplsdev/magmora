@@ -3,6 +3,21 @@
 All notable changes to Magmora are listed here. Versions follow [Semantic Versioning](https://semver.org/);
 before 1.0 a minor version may change parameters, state or sound.
 
+## 0.1.2
+
+### Added
+
+- **Windows VST3 (beta)**, for 64-bit Windows 10 and 11: the same tests as on macOS and pluginval at strictness 10
+  pass; it has not yet been played in a Windows DAW.
+
+### Fixed
+
+- **Windows: opening the editor without OpenGL 2.0 crashed the host** (a virtual machine, some remote sessions:
+  Windows' own driver offers only OpenGL 1.1, and the editor's renderer needs 2.0). Magmora now checks first and, when
+  it is missing, offers no editor of its own, so the host shows its controls for the parameters.
+
+The macOS build is unchanged from 0.1.1 apart from its version number.
+
 ## 0.1.1
 
 ### Fixed

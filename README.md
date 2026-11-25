@@ -213,10 +213,10 @@ Preferences..., and also in the window: open the about page (the circled i) and 
 
 ## Install
 
-Version 0.1.1. Requirements: macOS 11 (Big Sur) or later on a Mac with Apple Silicon (M1 or later). The release
+Version 0.1.2. Requirements: macOS 11 (Big Sur) or later on a Mac with Apple Silicon (M1 or later). The release
 build is arm64 only; Intel Macs need a build from source (below). An AU or VST3 host, or the stand-alone app.
 
-1. Unzip `Magmora-0.1.1-macOS.zip`.
+1. Unzip `Magmora-0.1.2-macOS.zip`.
 2. Copy the files into place:
    - `Magmora.component` (Audio Unit) to `~/Library/Audio/Plug-Ins/Components`
    - `Magmora.vst3` to `~/Library/Audio/Plug-Ins/VST3`
@@ -248,17 +248,22 @@ that you trust this download.
 
 To uninstall, delete the three files.
 
+**Windows (beta).** `Magmora-0.1.2-Windows-VST3-beta.zip` holds the VST3 for 64-bit Windows 10 and 11; its
+`INSTALL.txt` has the steps (copy `Magmora.vst3` to `C:\Program Files\Common Files\VST3`). It passes the same tests
+and pluginval at strictness 10, but has not been played in a Windows DAW yet: reports are welcome in the issues. There
+is no Windows stand-alone app, and the plug-in is not code-signed. Its editor needs OpenGL 2.0; on a machine without
+it (a virtual machine, some remote sessions) the host shows its own controls for the parameters instead.
+
 ## Formats and platforms
 
 | | macOS | Windows | Linux |
 |---|---|---|---|
 | AUv2 | yes | - | - |
-| VST3 | yes | builds (MSVC, x64); not yet tried in a host | - |
+| VST3 | yes | beta (MSVC, x64): pluginval passes; not yet tried in a DAW | - |
 | Stand-alone | yes | project not included | - |
 | DSP library, tests and tools | yes | yes: all tests pass (MSVC 2022) | yes: all tests pass (GCC 13 and 15) |
 
-Every push builds and tests macOS, Windows and Linux in CI. There is no Windows release download yet: the Windows
-VST3 builds and the engine passes the same tests as on macOS, but the plug-in has not been tried in a Windows host.
+Every push builds and tests macOS, Windows and Linux in CI. The Windows VST3 is released as a beta (above).
 
 No CLAP, AAX or VST2. iPlug2 at the pinned version has no Linux GUI.
 
@@ -332,8 +337,9 @@ For the most realistic result, load an impulse response or a pack you trust.
 - **Real-time soak:** in a 30-minute random-automation soak at Standard, three short bursts of 6 to 7 blocks
   (19 of 1.35 million 64-sample blocks, worst 184 %) went over real time; a rerun of one slice had none. A host
   with a larger buffer is safer ([docs/VERIFICATION.md](docs/VERIFICATION.md)).
-- auval and pluginval (AU and VST3) pass on macOS. On Windows the engine's tests pass and the VST3 builds, but the
-  plug-in has not been validated or played in a Windows host. See VERIFICATION.md.
+- auval and pluginval (AU and VST3) pass on macOS. On Windows the engine's tests and pluginval at strictness 10 pass
+  (in a virtual machine without OpenGL 2.0, so its editor test ran the no-editor path), but the plug-in has not been
+  played in a Windows DAW. See VERIFICATION.md.
 
 ## Licence
 

@@ -2,8 +2,8 @@
 // THE one definition of the product's name, IDs and version. A rename is the PLUG_NAME line.
 #define PLUG_NAME "Magmora"
 #define PLUG_MFR PLUG_NAME " Audio Project"
-#define PLUG_VERSION_HEX 0x00000101
-#define PLUG_VERSION_STR "0.1.1"
+#define PLUG_VERSION_HEX 0x00000102
+#define PLUG_VERSION_STR "0.1.2"
 #define PLUG_UNIQUE_ID 'MgAp'
 #define PLUG_MFR_ID 'Mgmr'
 #define PLUG_URL_STR ""

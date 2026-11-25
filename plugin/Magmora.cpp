@@ -2008,8 +2008,64 @@ private:
   Magmora& mPlug;
 };
 
+#if defined OS_WIN && defined IGRAPHICS_GL
+namespace {
+// Whether this machine's OpenGL offers 2.0 (shaders), which the editor's NanoVG renderer needs. Windows' own driver
+// without a graphics card (virtual machines, some remote sessions) offers only 1.1, and iPlug2 does not check: the
+// editor would call a missing function and take the host down. Probed once, on a hidden window of its own.
+bool HasOpenGL2() {
+  static const bool ok = [] {
+    const HINSTANCE instance = GetModuleHandleW(nullptr);
+    WNDCLASSW wc{};
+    wc.lpfnWndProc = DefWindowProcW;
+    wc.hInstance = instance;
+    wc.lpszClassName = L"MagmoraOpenGLProbe";
+    const bool registered = RegisterClassW(&wc) != 0;
+    const HWND window = CreateWindowW(wc.lpszClassName, L"", WS_POPUP, 0, 0, 1, 1, nullptr, nullptr, instance, nullptr);
+    bool found = true;  // a probe that cannot run says nothing: keep the editor
+    if (window) {
+      found = false;
+      const HDC dc = GetDC(window);
+      PIXELFORMATDESCRIPTOR pfd{};
+      pfd.nSize = sizeof pfd;
+      pfd.nVersion = 1;
+      pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+      pfd.iPixelType = PFD_TYPE_RGBA;
+      pfd.cColorBits = 32;
+      pfd.cDepthBits = 24;
+      pfd.cStencilBits = 8;
+      pfd.iLayerType = PFD_MAIN_PLANE;
+      const int format = ChoosePixelFormat(dc, &pfd);
+      if (format && SetPixelFormat(dc, format, &pfd)) {
+        const HGLRC previous = wglGetCurrentContext();
+        const HDC previousDc = wglGetCurrentDC();
+        if (const HGLRC context = wglCreateContext(dc)) {
+          if (wglMakeCurrent(dc, context)) {
+            // some drivers return 1, 2, 3 or -1 instead of null for a missing function
+            const auto f = reinterpret_cast<intptr_t>(wglGetProcAddress("glCreateShader"));
+            found = f != 0 && f != 1 && f != 2 && f != 3 && f != -1;
+            wglMakeCurrent(previousDc, previous);
+          }
+          wglDeleteContext(context);
+        }
+      }
+      ReleaseDC(window, dc);
+      DestroyWindow(window);
+    }
+    if (registered) UnregisterClassW(wc.lpszClassName, instance);
+    return found;
+  }();
+  return ok;
+}
+}  // namespace
+#endif
+
 IPlugView* PLUGIN_API Magmora::createView(const char* name) {
-  return HasUI() && name && std::strcmp(name, "editor") == 0 ? new MagmoraView(*this) : nullptr;
+  if (!HasUI() || !name || std::strcmp(name, "editor") != 0) return nullptr;
+#if defined OS_WIN && defined IGRAPHICS_GL
+  if (!HasOpenGL2()) return nullptr;  // no editor: the host shows its own controls for the parameters
+#endif
+  return new MagmoraView(*this);
 }
 
 bool Magmora::EditorResize(int viewWidth, int viewHeight) {

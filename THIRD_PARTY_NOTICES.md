@@ -82,6 +82,7 @@ Compiled files:
 - `third_party/iPlug2/IGraphics/Platforms/IGraphicsMac.mm`
 - `third_party/iPlug2/IGraphics/Platforms/IGraphicsMac_view.h`
 - `third_party/iPlug2/IGraphics/Platforms/IGraphicsMac_view.mm`
+- `third_party/iPlug2/IGraphics/Platforms/IGraphicsWin.h`
 - `third_party/iPlug2/IPlug/APP/IPlugAPP.cpp`
 - `third_party/iPlug2/IPlug/APP/IPlugAPP.h`
 - `third_party/iPlug2/IPlug/APP/IPlugAPP_dialog.cpp`
@@ -453,6 +454,8 @@ Compiled files:
 - `third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/fontstash.h`
 - `third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/nanovg.c`
 - `third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/nanovg.h`
+- `third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/nanovg_gl.h`
+- `third_party/iPlug2/Dependencies/IGraphics/NanoVG/src/nanovg_gl_utils.h`
 
 ## NanoSVG
 
@@ -635,6 +638,87 @@ Compiled files:
 
 - `third_party/iPlug2/IPlug/AUv2/dfx-au-utilities.c`
 - `third_party/iPlug2/IPlug/AUv2/dfx-au-utilities.h`
+
+## glad generated GL 2.1 loader and khrplatform.h
+
+Licence: MIT, Apache-2.0, Public-Domain. Copyright: 2013-2021 David Herberth; The Khronos Group
+https://github.com/Dav1dde/glad
+Windows only.
+
+```
+The glad generator is MIT. The loader it generated (glad_GL2) is in the public domain / CC0 as far as glad is
+concerned and derives from the Khronos XML specifications (Apache-2.0); KHR/khrplatform.h is MIT.
+
+The glad source code:
+
+    The MIT License (MIT)
+
+    Copyright (c) 2013-2021 David Herberth
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of
+    this software and associated documentation files (the "Software"), to deal in
+    the Software without restriction, including without limitation the rights to
+    use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+    the Software, and to permit persons to whom the Software is furnished to do so,
+    subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+The Khronos Specifications:
+
+    Copyright (c) 2013-2020 The Khronos Group Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+
+The EGL Specification and various headers:
+
+    Copyright (c) 2007-2016 The Khronos Group Inc.
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and/or associated documentation files (the
+    "Materials"), to deal in the Materials without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Materials, and to
+    permit persons to whom the Materials are furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Materials.
+
+    THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+```
+
+Compiled files:
+
+- `third_party/iPlug2/Dependencies/IGraphics/glad_GL2/include/KHR/khrplatform.h`
+- `third_party/iPlug2/Dependencies/IGraphics/glad_GL2/include/glad/glad.h`
+- `third_party/iPlug2/Dependencies/IGraphics/glad_GL2/src/glad.c`
 
 ## Red Sweater vertically centred text cell
 
