@@ -38,8 +38,11 @@ by or connected to the maker of that head or any other amplifier maker, and its 
 - Two circuit value sets: Revised (default) and As drawn (1992), saved with the session.
 - Mono, mono-to-stereo and stereo (left only, summed, or two independent amps).
 - Reported latency: 49 samples at 48 kHz in Standard, or zero with minimum-phase filters.
-- Around the amp, each on its own page: an overdrive pedal in front and a four-band EQ with high-pass and low-pass
-  (both off until switched on), and a cabinet with two slots summed in parallel (on in a new instance). Each slot
+- **Cinder**, an overdrive pedal in front of the amp, solved as a circuit like the head: the classic 1979 green
+  overdrive design (op-amp gain stage with diodes in its feedback, then a tone stage), with Drive, Tone and Level.
+  Off until switched on (see [The pedal](#the-pedal)).
+- Around the amp, each on its own page: a four-band EQ with high-pass and low-pass after it (off until switched on),
+  and a cabinet with two slots summed in parallel (on in a new instance). Each slot
   plays a virtual microphone placed on a cabinet pack, or your own impulse response file, with its own level, pan
   and phase. The pack is the built-in **Trad 4x12 (modelled)** with a 57-type microphone until you choose a folder
   of your own pack (Pack button on the cabinet page).
@@ -98,6 +101,27 @@ or right-click its name (which leaves the page as it is); the symbol flashes whe
 footswitch, the EQ's IN button and the amp's power and standby are the same switches. On the cabinet page, a slot
 that plays a response file shows small arrows in its source window: they load the previous or next `.wav` file of
 that file's folder (also in the source menu), the quickest way to try a folder of impulse responses.
+
+### The pedal
+
+![The pedal page](docs/images/magmora-pedal.jpg)
+
+Click **Pedal** in the bar for its page. The footswitch (or the power symbol on the tab) turns it on; the LED is lit
+while it is on. It sits after the gate and before the amp's input, and switching it is a short crossfade, not a click.
+
+- **Drive** sets the gain of the clipping stage: low settings are a clean boost with a little edge, high settings a
+  smooth overdrive on its own.
+- **Tone** goes from dark to bright after the clipping.
+- **Level** is the pedal's output, which is the amp's input: it is the knob that pushes the amp.
+
+All three at 5 (a new instance) is about -9 dB of level. In front of a high-gain head the usual use is the tight
+boost: Drive low, Level high, Tone to taste, which trims the low end before the amp and makes the lead channel
+tighter and more focused. The factory presets **Cinder Push**, **Cinder Lead** and **Scooped Wall** start there.
+
+The circuit is solved inside the amp's oversampled loop, so it adds no latency, and costs about 5 % of a core. Its
+model was checked against ngspice on the same netlist and against neural captures of a real unit of the 1979 design
+over a drive sweep (details in [docs/research/PEDAL.md](docs/research/PEDAL.md)). Like the head, its name and
+artwork are Magmora's own; it is not affiliated with the maker of the original pedal.
 
 ### Presets
 
