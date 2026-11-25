@@ -536,9 +536,12 @@ void AttachSections(IGraphics& g, const FramePtr& frame) {
   }
 }
 
+// The last part of a path; trailing separators ignored, as a folder chooser may return "/a/b/".
 std::string FileName(const std::string& path) {
-  const size_t slash = path.find_last_of("/\\");
-  return slash == std::string::npos ? path : path.substr(slash + 1);
+  const size_t end = path.find_last_not_of("/\\");
+  if (end == std::string::npos) return path;
+  const size_t slash = path.find_last_of("/\\", end);
+  return path.substr(slash == std::string::npos ? 0 : slash + 1, end - (slash == std::string::npos ? 0 : slash + 1) + 1);
 }
 
 using Actions = std::map<std::string, std::pair<std::function<void()>, std::function<bool()>>>;
@@ -681,8 +684,16 @@ void AttachCab(IGraphics& g, const FramePtr& frame) {
       std::snprintf(detail, sizeof detail, "   %.2f s %s", ir.seconds, ir.channels > 1 ? "stereo" : "mono");
       return FileName(ir.reference) + detail;
     };
+    // a pack microphone: the pack's name (the built-in cabinet's, or the folder's) and the microphone
+    const auto packText = [host, ui, type]() -> std::string {
+      if (host->CabMicCount() == 0) return {};
+      const std::string pack = host->CabIsBuiltin() ? host->BuiltinCabName() : FileName(host->CabStatus().folder);
+      const std::string mic = host->CabMicName(Choice(*ui, type));
+      if (pack.empty()) return mic;
+      return mic.empty() ? pack : pack + "  \xC2\xB7  " + mic;
+    };
     if (const pages::Control* cone = pages::Find(*page, n == 1 ? "cone1" : "cone2"))
-      g.AttachControl(new ConeMarker(*cone, frame, n, on, base, base + 1, holds, fileText), kNoTag, group);
+      g.AttachControl(new ConeMarker(*cone, frame, n, on, base, base + 1, holds, fileText, packText), kNoTag, group);
 
     // The row: what both sources have, then position and distance twice (working for a microphone, dimmed for a
     // file); SlotView shows the pair that fits the slot's source.

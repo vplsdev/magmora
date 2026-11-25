@@ -17,7 +17,11 @@ rounding (`eval/cab/test_virtualmic.py`, `dsp/tests/test_cab.cpp`).
   model-number tokens, zone words such as cap, cap edge, cone, edge, and lettered or numbered steps). Files are grouped
   into tracks per microphone, speaker, variant, angle and grille distance, each sorted along its coordinate. A pack
   whose positions are only an ordered series (no millimetres) becomes a "step" track that the position knob walks
-  through in equal steps.
+  through in equal steps, from the cap outwards. When that order comes from the names alone (no mapping file), the
+  C++ pack loader turns a track round if its last step is brighter than its first (energy of the first difference
+  over the energy, times the rate squared), so the knob's cap end is the bright end whichever way a maker letters
+  its files: ML Sound Lab letters A to E dark to bright. An order a mapping file gives is kept as written. The
+  prototype does not do this.
 - **Interpolation between two recorded positions ("morph").** Peaks and notches of the two magnitude responses are
   matched along a log-frequency axis by dynamic programming (1/96 octave, each feature may move up to 1/6 octave) and
   are moved as well as faded; the result is rebuilt as a minimum-phase response. A plain crossfade would cancel where

@@ -3,6 +3,20 @@
 All notable changes to Magmora are listed here. Versions follow [Semantic Versioning](https://semver.org/);
 before 1.0 a minor version may change parameters, state or sound.
 
+## 0.1.1
+
+### Fixed
+
+- **Cabinet packs lettered dark to bright** (ML Sound Lab's A to E, for one) played the wrong way round: the Position
+  knob went darker towards the cap. A step order that only the file names give now runs from the bright end at the
+  cap, whichever way the files are lettered; an order set in a `magmora-positions.json` mapping file is kept.
+- **The pack's name was missing** from the Pack menu (", 80 files, ..."): a chosen folder's path ends in a slash.
+
+### Changed
+
+- **A slot on a pack microphone shows the pack and the microphone** at the top of its cone, as a slot with a
+  response file shows the file's name.
+
 ## 0.1.0 (first public release)
 
 First release: an AU, VST3 and stand-alone application for macOS. Code under the MIT licence. The engine and its

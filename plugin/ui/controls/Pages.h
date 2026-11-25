@@ -324,14 +324,17 @@ private:
 
 // A slot's microphone on its cone: a numbered marker. Sideways is the position (cap to edge), down the distance
 // (close to far); it moves with the knobs and the knobs with it. A slot that holds a response file dims its cone.
+// A slot on a pack microphone names the pack and the microphone at the top of the cone, where the marker never goes.
 class ConeMarker final : public IControl {
 public:
   static constexpr float kMaxDistance = 300.f;  // mm, the distance parameter's range
 
   ConeMarker(const pages::Control& cone, FramePtr frame, int slot, int on, int position, int distance,
-             std::function<bool()> holdsFile, std::function<std::string()> fileText)
+             std::function<bool()> holdsFile, std::function<std::string()> fileText,
+             std::function<std::string()> packText = {})
   : IControl(pages::Cell(cone)), mFrame(std::move(frame)), mSlot(slot), mOn(on), mPosition(position),
-    mDistance(distance), mHoldsFile(std::move(holdsFile)), mFileText(std::move(fileText)) {}
+    mDistance(distance), mHoldsFile(std::move(holdsFile)), mFileText(std::move(fileText)),
+    mPackText(std::move(packText)) {}
 
   bool IsHit(float x, float y) const override {
     if (!Shown()) return false;
@@ -341,7 +344,7 @@ public:
 
   bool IsDirty() override {
     const std::string key = std::to_string(Value(mOn)) + "/" + std::to_string(Value(mPosition)) + "/" +
-                            std::to_string(Value(mDistance)) + "/" + (mHoldsFile() ? mFileText() : std::string("-"));
+                            std::to_string(Value(mDistance)) + "/" + (mHoldsFile() ? mFileText() : PackText());
     if (key != mShown) {
       mShown = key;
       SetDirty(false);
@@ -391,6 +394,9 @@ public:
       return;
     }
     if (!Shown()) return;
+    if (const std::string pack = PackText(); !pack.empty())
+      g.DrawText(style::Panel(9.5f, IColor(200, 230, 214, 186)), pack.c_str(),
+                 IRECT(cx - r * 0.8f, cy - r * 0.62f, cx + r * 0.8f, cy - r * 0.48f));
     const IRECT m = Marker();
     const float x = m.MW(), y = m.MH(), size = m.W() / 2.f;
     g.DrawLine(IColor(70, 230, 214, 186), cx, y, x, y, nullptr, 1.f);
@@ -419,6 +425,7 @@ private:
   }
 
   float Side() const { return mSlot == 1 ? -1.f : 1.f; }
+  std::string PackText() const { return mPackText ? mPackText() : std::string(); }
   double Value(int p) const { return const_cast<ConeMarker*>(this)->GetDelegate()->GetParam(p)->Value(); }
   bool Shown() const { return !mHoldsFile() && Value(mOn) >= 0.5; }
   IRECT Marker() const {
@@ -434,6 +441,7 @@ private:
   const int mSlot, mOn, mPosition, mDistance;
   std::function<bool()> mHoldsFile;
   std::function<std::string()> mFileText;
+  std::function<std::string()> mPackText;  // empty: no label
   std::string mShown;
   PairDrag mDrag;
 };

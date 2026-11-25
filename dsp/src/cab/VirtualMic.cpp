@@ -138,6 +138,50 @@ bool Pack::loadMemory(std::vector<PackFile> files, const std::string& mappingTex
   return index(std::move(usable), haveMapping ? &mapping : nullptr, "", skipped, error);
 }
 
+// A path whose order only the file names suggest (letters, "pos N": no mapping, no millimetres) is read as running from
+// the cap outwards, which is how most packs number it; some number it the other way, dark to bright (ML Sound Lab's
+// A to E). The cap is the bright end of a real cone, so such a path is turned round: per microphone, speaker, variant,
+// angle and distance, when its last step is brighter than its first. Brightness: the energy of the first difference
+// over the energy, times the rate squared (a mean squared frequency, so files at different rates compare).
+namespace {
+double brightness(const PackFile& f) {
+  double e = 0.0, d = 0.0;
+  for (size_t i = 0; i < f.samples.size(); ++i) {
+    const double v = f.samples[i];
+    e += v * v;
+    if (i > 0) {
+      const double dv = v - static_cast<double>(f.samples[i - 1]);
+      d += dv * dv;
+    }
+  }
+  return e > 0.0 ? d / e * f.rate * f.rate : 0.0;
+}
+
+void orientGuessedPaths(std::vector<PackFile>& files) {
+  std::map<std::string, std::vector<size_t>> tracks;
+  for (size_t k = 0; k < files.size(); ++k) {
+    const Position& p = files[k].pos;
+    if (!p.hasStep || p.hasX || p.source != "tokens") continue;
+    std::ostringstream key;
+    key << p.mic << '|' << p.speaker << '|' << p.variant << '|' << p.hasAngle << p.angleDeg << '|' << p.hasDist << p.distMm;
+    tracks[key.str()].push_back(k);
+  }
+  for (auto& [key, ks] : tracks) {
+    int lo = files[ks.front()].pos.step, hi = lo;
+    for (size_t k : ks) lo = std::min(lo, files[k].pos.step), hi = std::max(hi, files[k].pos.step);
+    if (lo == hi) continue;
+    double first = 0.0, last = 0.0;
+    int nFirst = 0, nLast = 0;
+    for (size_t k : ks) {
+      if (files[k].pos.step == lo) first += brightness(files[k]), ++nFirst;
+      if (files[k].pos.step == hi) last += brightness(files[k]), ++nLast;
+    }
+    if (last / nLast <= first / nFirst) continue;
+    for (size_t k : ks) files[k].pos.step = lo + hi - files[k].pos.step;
+  }
+}
+}  // namespace
+
 // Shared by load and loadMemory: positions from the names, variants, the pack gain, microphones and phase.
 bool Pack::index(std::vector<PackFile> files, const Mapping* mapping, const std::string& folder, int skipped,
                  std::string* error) {
@@ -186,6 +230,7 @@ bool Pack::index(std::vector<PackFile> files, const Mapping* mapping, const std:
       }
     }
   }
+  orientGuessedPaths(files);
   if (!std::isfinite(energy)) {  // the readers keep samples finite: a pack this loud cannot be played
     if (error) *error = "the pack's responses are not finite";
     return false;

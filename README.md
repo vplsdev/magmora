@@ -213,10 +213,10 @@ Preferences..., and also in the window: open the about page (the circled i) and 
 
 ## Install
 
-Version 0.1.0. Requirements: macOS 11 (Big Sur) or later on a Mac with Apple Silicon (M1 or later). The release
+Version 0.1.1. Requirements: macOS 11 (Big Sur) or later on a Mac with Apple Silicon (M1 or later). The release
 build is arm64 only; Intel Macs need a build from source (below). An AU or VST3 host, or the stand-alone app.
 
-1. Unzip `Magmora-0.1.0-macOS.zip`.
+1. Unzip `Magmora-0.1.1-macOS.zip`.
 2. Copy the files into place:
    - `Magmora.component` (Audio Unit) to `~/Library/Audio/Plug-Ins/Components`
    - `Magmora.vst3` to `~/Library/Audio/Plug-Ins/VST3`

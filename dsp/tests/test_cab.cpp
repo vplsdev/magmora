@@ -843,3 +843,48 @@ TEST_CASE("chain: nothing after the head can make the output non-finite or loude
   CHECK(r.peak <= 4.0);  // engine::kOutputClamp
   CHECK(r.peak == 4.0);
 }
+
+TEST_CASE("cab: a path guessed from the names runs from the bright end (the cap)") {
+  // a decaying exponential a^n: a near 1 is dark (low-passed), near 0 bright
+  auto onePole = [](double a) {
+    std::vector<double> x(2048);
+    for (size_t n = 0; n < x.size(); ++n) x[n] = std::pow(a, static_cast<double>(n));
+    return x;
+  };
+  const char letters[] = "ABCDE";
+  const double darkToBright[] = {0.95, 0.8, 0.6, 0.4, 0.2};
+  auto stepOf = [](const cab::Pack& pack, const std::string& name) {
+    for (const cab::PackFile& f : pack.files())
+      if (f.name == name) return f.pos.step;
+    return -1;
+  };
+  std::string error;
+
+  SECTION("lettered dark to bright: turned round") {
+    TempDir dir;
+    for (int k = 0; k < 5; ++k) writeWav(dir.path / ("PK-57-" + std::string(1, letters[k]) + ".wav"), onePole(darkToBright[k]));
+    cab::Pack pack;
+    REQUIRE(pack.load(dir.path.string(), "", &error));
+    CHECK(stepOf(pack, "PK-57-E.wav") == 0);
+    CHECK(stepOf(pack, "PK-57-C.wav") == 2);
+    CHECK(stepOf(pack, "PK-57-A.wav") == 4);
+  }
+  SECTION("lettered bright to dark: as named") {
+    TempDir dir;
+    for (int k = 0; k < 5; ++k) writeWav(dir.path / ("PK-57-" + std::string(1, letters[k]) + ".wav"), onePole(darkToBright[4 - k]));
+    cab::Pack pack;
+    REQUIRE(pack.load(dir.path.string(), "", &error));
+    CHECK(stepOf(pack, "PK-57-A.wav") == 0);
+    CHECK(stepOf(pack, "PK-57-E.wav") == 4);
+  }
+  SECTION("an order the mapping file gives is kept") {
+    TempDir dir;
+    for (int k = 0; k < 5; ++k) writeWav(dir.path / ("PK-57-" + std::string(1, letters[k]) + ".wav"), onePole(darkToBright[k]));
+    std::ofstream(dir.path / cab::kMappingFileName)
+        << R"({"schemes": [{"regex": "-(?P<mic>[0-9]+)-(?P<step>[A-E])$", "order": ["A", "B", "C", "D", "E"]}]})";
+    cab::Pack pack;
+    REQUIRE(pack.load(dir.path.string(), "", &error));
+    CHECK(stepOf(pack, "PK-57-A.wav") == 0);
+    CHECK(stepOf(pack, "PK-57-E.wav") == 4);
+  }
+}
